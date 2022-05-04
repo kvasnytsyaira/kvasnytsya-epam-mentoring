@@ -11,10 +11,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="jmp.dto" />
-    <orderEntry type="module" module-name="jmp.cloud.bank.impl" />
-    <orderEntry type="module" module-name="jmp.bank.api" />
-    <orderEntry type="module" module-name="jmp.cloud.service.impl" />
-    <orderEntry type="module" module-name="jmp.service.api" />
+    <orderEntry type="module" module-name="jmp-dto" />
+    <orderEntry type="module" module-name="jmp-bank-api" />
   </component>
 </module>

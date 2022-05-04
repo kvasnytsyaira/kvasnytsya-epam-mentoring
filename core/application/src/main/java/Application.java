@@ -10,6 +10,7 @@ import serviceImpl.ServiceImpl;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Optional;
 
 public class Application {
 
@@ -30,9 +31,10 @@ public class Application {
 
         //3.Get subscription by card number
         System.out.println("3.Get subscription by card number");
-        Subscription subscriptionByBankCardNumber =
-                service.getSubscriptionByBankCardNumber(bankCard.getNumber());
-        System.out.println(subscriptionByBankCardNumber.toString());
+        Optional<Subscription> subscriptionByBankCardNumber =
+        service.getSubscriptionByBankCardNumber(bankCard.getNumber());
+        subscriptionByBankCardNumber.ifPresent(System.out::println);
+
 
         //4.Get all users
         System.out.println("4.Get all users");
