@@ -12,6 +12,7 @@
         <module name="jmp.service.api" />
         <module name="jmp.dto" />
         <module name="jmp.cloud.bank.impl" />
+        <module name="Task-5" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -24,6 +25,8 @@
       <module name="jmp.service.api" target="11" />
       <module name="kvasnytsya-epam-mentoring" target="11" />
       <module name="multithreading" target="11" />
+      <module name="Task-5" target="11" />
+      <module name="Task5" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
