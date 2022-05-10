@@ -11,10 +11,12 @@ public class ExchangeRateImpl implements ExchangeRateService {
     @Override
     public void setExchangeRate(Currency currency, BigDecimal rate) {
         ExchangeRate exchangeRate = new ExchangeRate();
+        exchangeRate.getRates().put(currency,rate);
     }
 
     @Override
     public EnumMap<Currency, BigDecimal> getExchangeRates() {
-        return null;
+        ExchangeRate exchangeRate = new ExchangeRate();
+        return exchangeRate.getRates();
     }
 }

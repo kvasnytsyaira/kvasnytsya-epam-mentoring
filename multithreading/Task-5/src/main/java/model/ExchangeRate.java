@@ -4,17 +4,20 @@ import java.math.BigDecimal;
 import java.util.EnumMap;
 
 public class ExchangeRate {
-    private final EnumMap<Currency, BigDecimal> rates;
+    private static final EnumMap<Currency, BigDecimal> rates = new EnumMap<>(Currency.class);
 
     public ExchangeRate() {
-        rates = new EnumMap<Currency, BigDecimal>(Currency.class);
     }
 
-    public BigDecimal getRate(Currency currency) {
+    public static BigDecimal getRate(Currency currency) {
         return rates.get(currency);
     }
 
-    public void setRate(Currency currency, BigDecimal rate) {
+    public static void setRate(Currency currency, BigDecimal rate) {
         rates.put(currency, rate);
+    }
+
+    public EnumMap<Currency, BigDecimal> getRates() {
+        return rates;
     }
 }

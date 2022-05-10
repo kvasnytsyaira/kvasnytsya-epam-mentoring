@@ -1,21 +1,15 @@
 package app;
 
-import model.Currency;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import model.UserAccount;
-import service.ExchangeRateService;
-import serviceImpl.CurrencyOps;
-import serviceImpl.ExchangeRateImpl;
-import serviceImpl.UserAccountImpl;
 import utilities.Helper;
+import utilities.Helper2;
 import utilities.UserAccountScanner;
 
-import java.math.BigDecimal;
-import java.util.EnumMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
-
 public class Main {
     //    Make an application that contains business logic for making exchange operations between different currencies.
 //
@@ -32,30 +26,18 @@ public class Main {
 //    Make custom exceptions to let user to know the reason of error. Do not handle runtime exceptions.
 //    Validate inputs such an account existence, sufficiency of currency amount, etc.
 //    Log information about what is happening on different application levels and about conversion results. Use Logger for that.
-    public static void main(String[] args) throws InterruptedException {
-        UserAccountImpl userAccountService = new UserAccountImpl();
-        CurrencyOps currencyOps = new CurrencyOps();
-        currencyOps.init();
-
-        EnumMap<Currency, BigDecimal> account1 = new EnumMap<>(Currency.class);
-        account1.put(Currency.DOLLAR, BigDecimal.valueOf(1000));
-        account1.put(Currency.EURO, BigDecimal.valueOf(150));
-        account1.put(Currency.HRYVNYA, BigDecimal.valueOf(1500000));
-        userAccountService.getUserAccountStatus("account1");
-        UserAccount userAccount = new UserAccount("Account1", account1);
+    public static void main(String[] args) throws InterruptedException, JsonProcessingException {
 
         UserAccountScanner userAccountScanner = new UserAccountScanner();
-        userAccountScanner.readUserAccount("account1");
+        UserAccount userAccount1 = userAccountScanner.readUserAccount("account1");
+        UserAccount userAccount2 = userAccountScanner.readUserAccount("account2");
         ReentrantLock locker = new ReentrantLock();
 
-        ExecutorService service = Executors.newFixedThreadPool(5);
-        service.submit(new Helper(userAccount, locker));
-//        for (int i = 1; i < 6; i++){
-//
-//            Thread t = new Thread(new Helper(userAccount, locker));
-//            t.setName("Thread "+ i);
-//            t.start();
-//        }
+        ExecutorService service = Executors.newFixedThreadPool(4);
+        service.submit(new Helper(userAccount1, locker));
+        service.submit(new Helper(userAccount1, locker));
+        service.submit(new Helper2(userAccount2, locker));
+        service.submit(new Helper2(userAccount2, locker));
 
         TimeUnit.SECONDS.sleep(10);
         service.shutdown();

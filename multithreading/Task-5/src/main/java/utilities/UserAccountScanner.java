@@ -1,5 +1,7 @@
 package utilities;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import model.UserAccount;
 
 import java.io.BufferedReader;
@@ -8,10 +10,12 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class UserAccountScanner {
+    ObjectMapper objectMapper = new ObjectMapper();
+
     public UserAccountScanner() {
     }
 
-    public String readUserAccount(String accountName) {
+    public String readUserAccountFromFile(String accountName) {
         try {
             File file = new File("C:\\Users\\Iryna_Kvasnytsya\\IdeaProjects\\mentoring\\kvasnytsya-epam-mentoring\\multithreading\\Task-5\\src\\main\\resources\\" + accountName + ".txt");
             FileReader fr = new FileReader(file);
@@ -31,12 +35,17 @@ public class UserAccountScanner {
     }
 
     public String readUserAccountStatus(String accountName) {
-        return readUserAccount(accountName).split(";")[0];
+        return readUserAccountFromFile(accountName).split(";")[0];
 
     }
 
+    public UserAccount readUserAccount(String accountName) throws JsonProcessingException {
+        String s = readUserAccountStatus(accountName);
+        return objectMapper.readValue(s, UserAccount.class);
+    }
+
     public String readUserAccountTransactionHistory(String accountName) {
-        return readUserAccount(accountName).split(";")[1];
+        return readUserAccountFromFile(accountName).split(";")[1];
     }
 }
 

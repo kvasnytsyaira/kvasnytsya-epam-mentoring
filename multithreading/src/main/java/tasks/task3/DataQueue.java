@@ -3,7 +3,7 @@ package tasks.task3;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class DataQueue {
+public final class DataQueue {
     private final Queue<String> queue = new LinkedList<>();
     private final int max_size;
     private final Object full = new Object();

@@ -12,7 +12,7 @@ public class CurrencyTransaction {
 
     @Override
     public String toString() {
-        return "CurrencyTransaction{userAccount=" + userAccount +
+        return "CurrencyTransaction{userAccount=" + userAccount.getName() +
                 ", from=" + from +
                 ", to=" + to +
                 ", amount=" + amount +

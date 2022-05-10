@@ -7,12 +7,12 @@ import serviceImpl.CurrencyOps;
 import java.math.BigDecimal;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Helper implements Runnable {
+public class Helper2 implements Runnable {
     UserAccount userAccount;
     ReentrantLock lock;
     CurrencyOps currencyOps = new CurrencyOps();
 
-    public Helper(UserAccount userAccount, ReentrantLock lock) {
+    public Helper2(UserAccount userAccount, ReentrantLock lock) {
         this.userAccount = userAccount;
         this.lock = lock;
     }
@@ -21,8 +21,8 @@ public class Helper implements Runnable {
     public void run() {
         lock.lock();
         try {
-                System.out.println("Hello from " + Thread.currentThread().getName());
-                currencyOps.buy(userAccount, Currency.HRYVNYA, Currency.DOLLAR, BigDecimal.valueOf(10));
+            System.out.println("Hello from " + Thread.currentThread().getName());
+            currencyOps.buy(userAccount, Currency.HRYVNYA, Currency.EURO, BigDecimal.valueOf(10));
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
