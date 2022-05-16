@@ -1,8 +1,8 @@
 package repository;
 
-import models.BankCard;
-import models.DebitBankCard;
-import models.User;
+import model.BankCard;
+import model.DebitBankCard;
+import model.User;
 
 import java.util.ArrayList;
 import java.util.List;

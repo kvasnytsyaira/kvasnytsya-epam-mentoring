@@ -1,7 +1,7 @@
 package layerImpl;
 
 import layer.Bank;
-import models.*;
+import model.*;
 import repository.BankCardRepositoryLike;
 
 public class BankImpl implements Bank {

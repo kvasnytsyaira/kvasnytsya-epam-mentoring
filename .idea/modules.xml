@@ -5,11 +5,11 @@
       <module fileurl="file://$PROJECT_DIR$/multithreading/Task-5/Task-5.iml" filepath="$PROJECT_DIR$/multithreading/Task-5/Task-5.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/application/application.iml" filepath="$PROJECT_DIR$/core/application/application.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/core/jmp-bank-api/jmp.bank.api.iml" filepath="$PROJECT_DIR$/core/jmp-bank-api/jmp.bank.api.iml" />
-      <module fileurl="file://$PROJECT_DIR$/core/jmp-cloud-bank-impl/jmp.cloud.bank.impl.iml" filepath="$PROJECT_DIR$/core/jmp-cloud-bank-impl/jmp.cloud.bank.impl.iml" />
-      <module fileurl="file://$PROJECT_DIR$/core/jmp-cloud-service-impl/jmp.cloud.service.impl.iml" filepath="$PROJECT_DIR$/core/jmp-cloud-service-impl/jmp.cloud.service.impl.iml" />
-      <module fileurl="file://$PROJECT_DIR$/core/jmp-dto/jmp.dto.iml" filepath="$PROJECT_DIR$/core/jmp-dto/jmp.dto.iml" />
-      <module fileurl="file://$PROJECT_DIR$/core/jmp-service-api/jmp.service.api.iml" filepath="$PROJECT_DIR$/core/jmp-service-api/jmp.service.api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/jmp.bank.api/jmp.bank.api.iml" filepath="$PROJECT_DIR$/core/jmp.bank.api/jmp.bank.api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/jmp.cloud.bank.impl/jmp.cloud.bank.impl.iml" filepath="$PROJECT_DIR$/core/jmp.cloud.bank.impl/jmp.cloud.bank.impl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/jmp.cloud.service.impl/jmp.cloud.service.impl.iml" filepath="$PROJECT_DIR$/core/jmp.cloud.service.impl/jmp.cloud.service.impl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/jmp.dto/jmp.dto.iml" filepath="$PROJECT_DIR$/core/jmp.dto/jmp.dto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/jmp.service.api/jmp.service.api.iml" filepath="$PROJECT_DIR$/core/jmp.service.api/jmp.service.api.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/kvasnytsya-epam-mentoring.iml" filepath="$PROJECT_DIR$/.idea/kvasnytsya-epam-mentoring.iml" />
       <module fileurl="file://$PROJECT_DIR$/multithreading/multithreading.iml" filepath="$PROJECT_DIR$/multithreading/multithreading.iml" />
     </modules>

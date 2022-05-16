@@ -1,6 +1,6 @@
 package repository;
 
-import models.User;
+import model.User;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

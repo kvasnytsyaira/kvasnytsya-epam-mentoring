@@ -1,8 +1,8 @@
 package service;
 
-import models.BankCard;
-import models.Subscription;
-import models.User;
+import model.BankCard;
+import model.Subscription;
+import model.User;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;

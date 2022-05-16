@@ -1,4 +1,4 @@
-module jmp.bank.api{
-        requires jmp.dto;
-        exports layer;
-        }
+module jmp.bank.api {
+    requires jmp.dto;
+    exports layer;
+}

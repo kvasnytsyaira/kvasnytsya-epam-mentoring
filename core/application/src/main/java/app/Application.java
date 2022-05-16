@@ -1,8 +1,10 @@
+package app;
+
 import layerImpl.BankImpl;
-import models.BankCardType;
-import models.BankCard;
-import models.Subscription;
-import models.User;
+import model.BankCardType;
+import model.BankCard;
+import model.Subscription;
+import model.User;
 import repository.UserRepositoryLike;
 import service.MyService;
 import serviceImpl.ServiceImpl;

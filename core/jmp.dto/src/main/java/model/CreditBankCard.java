@@ -1,4 +1,4 @@
-package models;
+package model;
 
 public class CreditBankCard extends BankCard{
     public CreditBankCard(User user) {

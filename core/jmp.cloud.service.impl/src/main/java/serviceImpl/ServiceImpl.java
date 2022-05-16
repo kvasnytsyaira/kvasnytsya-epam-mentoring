@@ -1,9 +1,8 @@
 package serviceImpl;
 
-import exceptions.IncorrectCardNumberException;
-import models.BankCard;
-import models.Subscription;
-import models.User;
+import model.BankCard;
+import model.Subscription;
+import model.User;
 import repository.BankCardRepositoryLike;
 import repository.SubscriptionRepositoryLike;
 import repository.UserRepositoryLike;

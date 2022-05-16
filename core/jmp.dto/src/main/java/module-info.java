@@ -1,4 +1,4 @@
 module jmp.dto {
-    exports models;
+    exports model;
     exports repository;
 }

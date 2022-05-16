@@ -1,7 +1,7 @@
 package repository;
 
-import models.BankCard;
-import models.Subscription;
+import model.BankCard;
+import model.Subscription;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

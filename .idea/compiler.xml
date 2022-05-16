@@ -11,8 +11,8 @@
         <module name="application" />
         <module name="jmp.service.api" />
         <module name="jmp.dto" />
-        <module name="jmp.cloud.bank.impl" />
         <module name="Task-5" />
+        <module name="jmp.cloud.bank.impl" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

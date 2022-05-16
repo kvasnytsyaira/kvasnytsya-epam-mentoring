@@ -11,7 +11,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="jmp-dto" />
-    <orderEntry type="module" module-name="jmp-service-api" />
+    <orderEntry type="module" module-name="jmp.dto" />
+    <orderEntry type="module" module-name="jmp.service.api" />
   </component>
 </module>
