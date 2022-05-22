@@ -17,6 +17,7 @@
     <modules>
         <module>multithreading</module>
         <module>core</module>
+        <module>testing</module>
     </modules>
 
     <dependencies></dependencies>
