@@ -28,9 +28,10 @@ public class Messenger {
      * @param client   the client
      * @param template the template
      */
-    public void sendMessage(Client client, Template template) {
-        String messageContent =
-                templateEngine.generateMessage(template, client);
+    public void sendMessage(Client client, Template template) throws Exception {
+        String messageContent = templateEngine.generateMessage(template, client);
+        System.out.println("message generated from messenger");
         mailServer.send(client.getAddresses(), messageContent);
+        System.out.println("message sent from messenger");
     }
 }

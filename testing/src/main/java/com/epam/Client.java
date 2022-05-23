@@ -23,4 +23,8 @@ public class Client {
     public void setAddresses(String addresses) {
         this.addresses = addresses;
     }
+
+    public Client(String addresses) {
+        this.addresses = addresses;
+    }
 }
