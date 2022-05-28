@@ -1,41 +1,94 @@
 package com.epam.template;
 
 import com.epam.Client;
-import org.junit.Test;
+import com.epam.PlaceholderNotProvidedException;
+import com.epam.Reader;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
-import static org.junit.Assert.*;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+
+import static org.junit.Assert.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class TemplateEngineTest {
 
-    @Test
-    public void testSystemReplacesVariablePlaceholdersFromATemplateWithValues() throws Exception {
-        TemplateEngine templateEngine = new TemplateEngine();
-        String message = templateEngine.generateMessage(new Template("byeBye", "HelloWorld", "I am body"), new Client("ira"));
+    TemplateEngine templateEngine;
+    Reader reader;
 
-        assertFalse(message.contains("#{body}") && message.contains("#{subject}"));
+    String PATH = "C:\\Users\\Iryna_Kvasnytsya\\IdeaProjects\\mentoring\\kvasnytsya-epam-mentoring\\testing\\src\\main\\resources\\";
+    String FILE_NAME_TEMP_FOR_EXTRA_TAG = "testFile2";
+    String FILE_NAME_TEMP_WITHOUT_ONE_PLACEHOLDER = "testFile1";
+    String FILE_NAME = "byeBye";
+
+    String SUBJECT = "I am subject";
+    String BODY = "I am body";
+    String BODY_WITH_EXTRA_VALUE = "I am body\\n#{tag}";
+
+    String TEMPLATE = "#{subject}\\n\\n\\n#{body}\\n\\nBye bye!";
+    String TEMPLATE_WITHOUT_ONE_PLACEHOLDER = "#{subject}\\n\\n\\n#{tag}\\n\\nBye bye!";
+    String EMAIL = "I am subject\n\n\nI am body\n\nBye bye!\\n\\n";
+    String EMAIL_WITH_VALUE_NOT_FROM_TEMPLATE = "I am subject\\n\\n\\nI am body\\n#{tag}\\n\\nBye bye!\n";
+
+    Client client = new Client("a@gmail.com");
+
+    @TempDir
+    public static Path tempDir;
+
+    @BeforeEach
+    public void initialize() throws IOException {
+        templateEngine = new TemplateEngine();
+        reader = mock(Reader.class);
+        Path templateFileWithoutOnePlaceholder = tempDir.resolve(PATH + FILE_NAME_TEMP_WITHOUT_ONE_PLACEHOLDER + ".txt");
+        List<String> mail1 = List.of(TEMPLATE_WITHOUT_ONE_PLACEHOLDER);
+        Files.write(templateFileWithoutOnePlaceholder, mail1);
+
+        Path templateFileWithExtraTag = tempDir.resolve(PATH + FILE_NAME_TEMP_FOR_EXTRA_TAG + ".txt");
+        List<String> mail2 = List.of(TEMPLATE);
+        Files.write(templateFileWithExtraTag, mail2);
+    }
+
+    @Test
+    public void testSystemReplacesVariablePlaceholdersFromATemplateWithValues() {
+        String message = templateEngine.generateMessage(new Template(FILE_NAME, SUBJECT, BODY), client);
+
+        Assertions.assertFalse(message.contains("#{body}") && message.contains("#{subject}"));
 
     }
 
-    @Test(expected = Exception.class)
-    public void testSystemThrowAnExceptionIfAtLeastOnePlaceholderIsNotProvided() throws Exception {
-        TemplateEngine templateEngine = new TemplateEngine();
-        templateEngine.generateMessage(new Template("bestRegards", "I am subject", ""), new Client("h"));
+    @Test
+    public void testSystemThrowAnExceptionIfAtLeastOnePlaceholderIsNotProvided() {
+        when(reader.readMailFromFile(PATH + FILE_NAME_TEMP_WITHOUT_ONE_PLACEHOLDER + ".txt"))
+                .thenReturn(TEMPLATE_WITHOUT_ONE_PLACEHOLDER);
+
+        assertThrows(PlaceholderNotProvidedException.class,
+                () -> templateEngine.generateMessage(
+                        new Template(FILE_NAME_TEMP_WITHOUT_ONE_PLACEHOLDER, SUBJECT, ""),
+                        client));
     }
 
     @Test
-    public void testSystemIgnoresValuesWhichAreNotFromTheTemplate() throws Exception {
-        TemplateEngine templateEngine = new TemplateEngine();
-        String s = templateEngine.generateMessage(new Template("testFile", "I am subject", "I am body"), new Client("j"));
+    public void testSystemIgnoresValuesWhichAreNotFromTheTemplate() {
+        String s = templateEngine.generateMessage(
+                new Template(FILE_NAME_TEMP_FOR_EXTRA_TAG, SUBJECT, BODY_WITH_EXTRA_VALUE), client);
 
-        assertEquals("I am subject\n\n\nI am body\n#{tag}\n\nBye bye!\n", s);
+        Assertions.assertEquals(EMAIL_WITH_VALUE_NOT_FROM_TEMPLATE, s);
     }
 
-    @Test
-    public void testSystemPassesValuesInTemplateThatConsistOfTagAndBrackets() throws Exception {
-        TemplateEngine templateEngine = new TemplateEngine();
-        String s = templateEngine.generateMessage(new Template("seeYouSoon", "I am subject", "I am body"), new Client("p"));
 
-        assertEquals("I am subject\n\n\nI am body\n\nSee you soon!\n", s);
+    @Test
+    public void testSystemPassesValuesInTemplateThatConsistOfTagAndBrackets() {
+        String s = templateEngine.generateMessage(
+                new Template(FILE_NAME, SUBJECT, BODY), client);
+
+        Assertions.assertEquals("I am subject\n\n\nI am body\n\nBye bye!\n", s);
     }
 
     @Test
