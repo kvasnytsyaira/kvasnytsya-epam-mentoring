@@ -1,6 +1,6 @@
 package tasks;
 
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.ArrayList;
 
 public class Task4 {
     BlockingObjectPool blockingObjectPool;
@@ -37,7 +37,7 @@ public class Task4 {
      * Pool that block when it has not any items or it full
      */
     public static class BlockingObjectPool {
-        private final LinkedBlockingQueue<Object> pool;
+        private final ArrayList<Object> pool;
         private int size;
 
         /**
@@ -45,7 +45,7 @@ public class Task4 {
          * * @param size of pool
          */
         public BlockingObjectPool(int size) {
-            this.pool = new LinkedBlockingQueue<>(size);
+            this.pool = new ArrayList<>(size);
             this.size = size;
         }
 
@@ -53,16 +53,25 @@ public class Task4 {
          * Gets object from pool or blocks if pool is empty *
          * * @return object from pool
          */
-        public Object get() throws InterruptedException {
-            return pool.take();
+        public synchronized Object get() throws InterruptedException {
+            while (pool.isEmpty()) {
+                wait();
+            }
+            System.out.println("Removed");
+            return pool.remove(0);
         }
 
         /**
          * Puts object to pool or blocks if pool is full *
          * * @param object to be taken back to pool
          */
-        public void take(Object object) throws InterruptedException {
-            pool.put(object);
+        public synchronized void take(Object object) throws InterruptedException {
+            while (pool.size() == size) {
+                pool.wait();
+            }
+            Object o = pool.add(object);
+            System.out.println("Added");
+            notify();
         }
     }
 }
