@@ -1,6 +1,7 @@
 package com.epam.template;
 
 import com.epam.Client;
+import com.epam.PlaceholderNotProvidedException;
 
 
 /**
@@ -14,12 +15,12 @@ public class TemplateEngine {
      * @param client   the client
      * @return the string
      */
-    public String generateMessage(Template template, Client client) throws Exception {
+    public String generateMessage(Template template, Client client) throws PlaceholderNotProvidedException {
         System.out.println("generate message in templateEngine");
         return processMessage(template).getMessage();
     }
 
-    private Template processMessage(Template template) throws Exception {
+    private Template processMessage(Template template) throws PlaceholderNotProvidedException {
         String message = template.getMessage();
         message = message.replace("#{subject}", template.getSubject());
         message = message.replace("#{body}", template.getBody());
@@ -29,7 +30,7 @@ public class TemplateEngine {
 
         if (template.getSubject().isEmpty() ||
                 template.getBody().isEmpty()) {
-            throw new Exception("Please provide all placeholders");
+            throw new PlaceholderNotProvidedException("Please provide all placeholders");
         }
         return template;
     }

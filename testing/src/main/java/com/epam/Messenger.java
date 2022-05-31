@@ -9,6 +9,7 @@ import com.epam.template.TemplateEngine;
 public class Messenger {
     private MailServer mailServer;
     private TemplateEngine templateEngine;
+    private Writer writer = new Writer();
 
     /**
      * Instantiates a new Messenger.
@@ -30,8 +31,7 @@ public class Messenger {
      */
     public void sendMessage(Client client, Template template) throws Exception {
         String messageContent = templateEngine.generateMessage(template, client);
-        System.out.println("message generated from messenger");
         mailServer.send(client.getAddresses(), messageContent);
-        System.out.println("message sent from messenger");
+        writer.updateFile(client.getAddresses(), messageContent);
     }
 }
