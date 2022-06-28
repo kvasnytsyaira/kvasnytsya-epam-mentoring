@@ -1,7 +1,0 @@
-#{subject}
-
-
-#{body}
-#{tag}
-
-Bye bye!

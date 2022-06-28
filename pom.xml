@@ -19,6 +19,7 @@
         <module>core</module>
         <module>testing</module>
         <module>io-nio</module>
+        <module>database</module>
     </modules>
 
     <dependencies></dependencies>
