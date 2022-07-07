@@ -1,0 +1,31 @@
+BTree create index by name(students table): 114
+Hash create index by name(students table): 102
+
+--a. Find user by name (exact match)
+CREATE INDEX name_index_hash ON public.student USING btree(name);
+CREATE INDEX name_index_hash ON public.student USING hash(name);
+    select * from students where name = 'Ira';
+Hash index: 69
+BTree: 67
+
+--b. Find user by surname (partial match)
+CREATE INDEX index_surname ON public.student USING hash (surname);
+CREATE INDEX index_surname ON public.student USING btree (surname);
+    select * from students where surname like 'sur%';
+Hash index: 82
+BTree: 72
+
+--c. Find user by phone number (partial match)
+CREATE INDEX index_phone ON public.student USING hash (phone_numbers);
+CREATE INDEX index_phone ON public.student USING btree (phone_numbers);
+    select * from students where phone_numbers like '093%';
+Hash index: 70
+BTree: 82
+
+--d. Find user with marks by user surname (partial match)
+CREATE INDEX name_index_hash ON public.student USING hash(name);
+CREATE INDEX name_index_hash ON public.student USING btree(name);
+    select * from student join exam_result on student.student_id=exam_result.student_id
+    where student.surname like '%name1';
+Hash index: 77
+BTree: 69
