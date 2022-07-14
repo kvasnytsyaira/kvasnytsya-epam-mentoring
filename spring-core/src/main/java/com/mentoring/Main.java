@@ -1,6 +1,7 @@
 package com.mentoring;
 
-import com.mentoring.config.WebConfig;
+import com.mentoring.config.MainConfig;
+import com.mentoring.facade.BookingFacade;
 import com.mentoring.facade.BookingFacadeImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -15,26 +16,10 @@ public class Main {
     }
 
     private static void init() {
-        ApplicationContext context = new AnnotationConfigApplicationContext(WebConfig.class);
-        BookingFacadeImpl bean = context.getBean(BookingFacadeImpl.class);
-        System.out.println(bean);
-        System.out.println("************************************************************************");
-        System.out.println("************************************************************************");
-        System.out.println("************************************************************************");
-        System.out.println("************************************************************************");
-        System.out.println("************************************************************************");
-        System.out.println("************************************************************************");
-        System.out.println("************************************************************************");
-        System.out.println("************************************************************************");
-        System.out.println("************************************************************************");
-        System.out.println("************************************************************************");
-        System.out.println("************************************************************************");
-        System.out.println("************************************************************************");
-        System.out.println("************************************************************************");
-        System.out.println("************************************************************************");
-        System.out.println("************************************************************************");
-        System.out.println("************************************************************************");
+        ApplicationContext context = new AnnotationConfigApplicationContext(MainConfig.class);
+        BookingFacade bookingFacade = context.getBean(BookingFacadeImpl.class);
 
+        System.out.println(bookingFacade.getEventById(1));
     }
 
 

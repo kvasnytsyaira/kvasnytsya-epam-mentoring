@@ -1,19 +1,18 @@
 package com.mentoring.facade;
 
 import com.mentoring.model.Event;
-import com.mentoring.model.OneDayTicket;
 import com.mentoring.model.Ticket;
 import com.mentoring.model.User;
-import com.mentoring.service.*;
+import com.mentoring.service.EventService;
+import com.mentoring.service.TicketService;
+import com.mentoring.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
 
-@Component
 public class BookingFacadeImpl implements BookingFacade {
     private static Logger logger = LoggerFactory.getLogger(Logger.class);
 
@@ -181,10 +180,7 @@ public class BookingFacadeImpl implements BookingFacade {
     /**
      * Book ticket for a specified event on behalf of specified user.
      *
-     * @param userId   User Id.
-     * @param eventId  Event Id.
-     * @param place    Place number.
-     * @param category Service category.
+     * @param ticket .
      * @return Booked ticket object.
      * @throws java.lang.IllegalStateException if this place has already been booked.
      */
