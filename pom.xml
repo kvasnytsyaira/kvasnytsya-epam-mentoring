@@ -20,6 +20,7 @@
         <module>testing</module>
         <module>io-nio</module>
         <module>database</module>
+        <module>spring-core</module>
     </modules>
 
     <dependencies></dependencies>
