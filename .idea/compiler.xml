@@ -12,6 +12,7 @@
         <module name="database" />
         <module name="jmp.bank.api" />
         <module name="spring-core" />
+        <module name="spring-mvc" />
         <module name="application" />
         <module name="jmp.service.api" />
         <module name="testing" />
@@ -21,22 +22,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="application" target="11" />
-      <module name="core" target="11" />
-      <module name="database" target="11" />
-      <module name="io-nio" target="11" />
-      <module name="jmp.bank.api" target="11" />
-      <module name="jmp.cloud.bank.impl" target="11" />
-      <module name="jmp.cloud.service.impl" target="11" />
-      <module name="jmp.dto" target="11" />
-      <module name="jmp.service.api" target="11" />
-      <module name="kvasnytsya-epam-mentoring" target="11" />
-      <module name="multithreading" target="11" />
-      <module name="spring-core" target="11" />
-      <module name="Task-5" target="11" />
       <module name="Task5" target="11" />
-      <module name="task7" target="11" />
-      <module name="testing" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

@@ -21,6 +21,7 @@
         <module>io-nio</module>
         <module>database</module>
         <module>spring-core</module>
+        <module>spring-mvc</module>
     </modules>
 
     <dependencies></dependencies>
