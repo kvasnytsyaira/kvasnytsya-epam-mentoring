@@ -1,5 +1,7 @@
 package mentoring.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -9,6 +11,7 @@ public class ConcertEvent implements Event {
 
     long id;
     String title;
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
     Date date;
 
     /**

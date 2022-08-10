@@ -28,21 +28,21 @@ public class Storage {
 
 
     public Ticket save(Ticket ticket) {
-        if (Objects.equals(ticket.getId(), null)) {
+        if (ticket.getId() == 0) {
             ticket.setId(setTicketId());
         }
         return getTickets().put("ticket:" + ticket.getId(), ticket);
     }
 
     public Event save(Event event) {
-        if (Objects.equals(event.getId(), null)) {
+        if (event.getId() == 0) {
             event.setId(setEventId());
         }
         return getEvents().put("event:" + event.getId(), event);
     }
 
     public User save(User user) {
-        if (Objects.equals(user.getId(), null)) {
+        if (user.getId() == 0) {
             user.setId(setUserId());
         }
         return getUsers().put("user:" + user.getId(), user);
@@ -71,15 +71,15 @@ public class Storage {
     }
 
     private long setTicketId() {
-        return getTickets().size();
+        return getTickets().size() + 1;
     }
 
     private long setEventId() {
-        return getEvents().size();
+        return getEvents().size() + 1;
     }
 
     private long setUserId() {
-        return getUsers().size();
+        return getUsers().size() + 1;
     }
 
 }

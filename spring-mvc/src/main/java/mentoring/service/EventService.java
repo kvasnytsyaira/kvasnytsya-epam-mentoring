@@ -9,13 +9,14 @@ public interface EventService {
 
     Event getEventById(long eventId);
 
-    List<Event> getEventsByTitle(String title, int pageSize, int pageNum);
+    List<Event> getEventsByTitle(String title, long pageSize, long pageNum);
 
-    List<Event> getEventsForDay(Date date, int pageSize, int pageNum);
+    List<Event> getEventsForDay(Date date, long pageSize, long pageNum);
 
     Event createEvent(Event event);
 
-    Event updateEvent(Event event);
+    Event updateEvent(long eventId , Event event);
+    Event updateEventTitle(int id, String title);
 
     boolean deleteEvent(long eventId);
 

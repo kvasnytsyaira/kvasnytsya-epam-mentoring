@@ -10,11 +10,11 @@ public interface UserService {
 
     User getUserByEmail(String email);
 
-    List<User> getUsersByName(String name, int pageSize, int pageNum);
+    List<User> getUsersByName(String name, long pageSize, long pageNum);
 
     User createUser(User user);
 
-    User updateUser(User user);
+    User updateUser(long id, User user);
 
     boolean deleteUser(long userId);
 

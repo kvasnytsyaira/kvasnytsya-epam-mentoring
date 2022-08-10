@@ -10,9 +10,9 @@ public interface TicketService {
 
     Ticket bookTicket(Ticket ticket);
 
-    List<Ticket> getBookedTickets(User user, int pageSize, int pageNum);
+    List<Ticket> getBookedTickets(User user, long pageSize, long pageNum);
 
-    List<Ticket> getBookedTickets(Event event, int pageSize, int pageNum);
+    List<Ticket> getBookedTickets(Event event, long pageSize, long pageNum);
 
     boolean cancelTicket(long ticketId);
 }

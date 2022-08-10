@@ -4,6 +4,7 @@ import mentoring.model.Event;
 import mentoring.model.Ticket;
 import mentoring.model.User;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public interface BookingFacade {
      * @param pageNum  Pagination param. Number of the page to return. Starts from 1.
      * @return List of events.
      */
-    List<Event> getEventsByTitle(String title, int pageSize, int pageNum);
+    List<Event> getEventsByTitle(String title, long pageSize, long pageNum);
 
     /**
      * Get list of events for specified day.
@@ -40,7 +41,7 @@ public interface BookingFacade {
      * @param pageNum  Pagination param. Number of the page to return. Starts from 1.
      * @return List of events.
      */
-    List<Event> getEventsForDay(Date day, int pageSize, int pageNum);
+    List<Event> getEventsForDay(Date day, long pageSize, long pageNum);
 
     /**
      * Creates new event. Event id should be auto-generated.
@@ -56,7 +57,7 @@ public interface BookingFacade {
      * @param event Event data for update. Should have id set.
      * @return Updated Event object.
      */
-    Event updateEvent(Event event);
+    Event updateEvent(long id, Event event);
 
     /**
      * Deletes event by its id.
@@ -89,7 +90,7 @@ public interface BookingFacade {
      * @param pageNum  Pagination param. Number of the page to return. Starts from 1.
      * @return List of users.
      */
-    List<User> getUsersByName(String name, int pageSize, int pageNum);
+    List<User> getUsersByName(String name, long pageSize, long pageNum);
 
     /**
      * Creates new user. User id should be auto-generated.
@@ -105,7 +106,7 @@ public interface BookingFacade {
      * @param user User data for update. Should have id set.
      * @return Updated User object.
      */
-    User updateUser(User user);
+    User updateUser(long id, User user);
 
     /**
      * Deletes user by its id.
@@ -118,7 +119,7 @@ public interface BookingFacade {
     /**
      * Book ticket for a specified event on behalf of specified user.
      *
-     * @param ticket   Ticket
+     * @param ticket Ticket
      * @return Booked ticket object.
      * @throws IllegalStateException if this place has already been booked.
      */
@@ -132,7 +133,7 @@ public interface BookingFacade {
      * @param pageNum  Pagination param. Number of the page to return. Starts from 1.
      * @return List of Ticket objects.
      */
-    List<Ticket> getBookedTickets(User user, int pageSize, int pageNum);
+    List<Ticket> getBookedTickets(User user, long pageSize, long pageNum);
 
     /**
      * Get all booked tickets for specified event. Tickets should be sorted in by user email in ascending order.
@@ -142,7 +143,7 @@ public interface BookingFacade {
      * @param pageNum  Pagination param. Number of the page to return. Starts from 1.
      * @return List of Ticket objects.
      */
-    List<Ticket> getBookedTickets(Event event, int pageSize, int pageNum);
+    List<Ticket> getBookedTickets(Event event, long pageSize, long pageNum);
 
 
     /**
@@ -152,5 +153,10 @@ public interface BookingFacade {
      * @return Flag whether anything has been canceled.
      */
     boolean cancelTicket(long ticketId);
+
+
+    byte[] createPdf(long user, long pageSize, long pageNum) throws IOException;
+
+    Event updateEventName(int id, String eventName);
 
 }

@@ -1,15 +1,22 @@
 package mentoring.facade;
 
+import mentoring.exceptions.RecordsNotFoundForSearchCriteriaException;
 import mentoring.model.Event;
 import mentoring.model.Ticket;
 import mentoring.model.User;
 import mentoring.service.EventService;
 import mentoring.service.TicketService;
 import mentoring.service.UserService;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -46,9 +53,12 @@ public class BookingFacadeImpl implements BookingFacade {
      * @param pageNum  Pagination param. Number of the page to return. Starts from 1.
      * @return List of events.
      */
-    public List<Event> getEventsByTitle(String title, int pageSize, int pageNum) {
+    public List<Event> getEventsByTitle(String title, long pageSize, long pageNum) {
         logger.info("*** BookingFacade: Get event by title");
-        return eventService.getEventsByTitle(title, pageSize, pageNum);
+        List<Event> eventsByTitle = eventService.getEventsByTitle(title, pageSize, pageNum);
+        if (eventsByTitle.size() > 0) {
+            return eventsByTitle;
+        } else throw new RecordsNotFoundForSearchCriteriaException("No events with title " + title + " found");
     }
 
 
@@ -61,9 +71,12 @@ public class BookingFacadeImpl implements BookingFacade {
      * @param pageNum  Pagination param. Number of the page to return. Starts from 1.
      * @return List of events.
      */
-    public List<Event> getEventsForDay(Date day, int pageSize, int pageNum) {
+    public List<Event> getEventsForDay(Date day, long pageSize, long pageNum) {
         logger.info("*** BookingFacade: Get event for day");
-        return eventService.getEventsForDay(day, pageSize, pageNum);
+        List<Event> eventsByDate = eventService.getEventsForDay(day, pageSize, pageNum);
+        if (eventsByDate.size() > 0) {
+            return eventsByDate;
+        } else throw new RecordsNotFoundForSearchCriteriaException("No events with date " + day + " found");
     }
 
 
@@ -85,9 +98,9 @@ public class BookingFacadeImpl implements BookingFacade {
      * @param event Event data for update. Should have id set.
      * @return Updated Event object.
      */
-    public Event updateEvent(Event event) {
+    public Event updateEvent(long eventId, Event event) {
         logger.info("*** BookingFacade: Update event ");
-        return eventService.updateEvent(event);
+        return eventService.updateEvent(eventId, event);
     }
 
 
@@ -135,7 +148,7 @@ public class BookingFacadeImpl implements BookingFacade {
      * @param pageNum  Pagination param. Number of the page to return. Starts from 1.
      * @return List of users.
      */
-    public List<User> getUsersByName(String name, int pageSize, int pageNum) {
+    public List<User> getUsersByName(String name, long pageSize, long pageNum) {
         logger.info("*** BookingFacade: Get users by name");
         return userService.getUsersByName(name, pageSize, pageNum);
     }
@@ -159,9 +172,9 @@ public class BookingFacadeImpl implements BookingFacade {
      * @param user User data for update. Should have id set.
      * @return Updated User object.
      */
-    public User updateUser(User user) {
+    public User updateUser(long id, User user) {
         logger.info("*** BookingFacade: Update user ");
-        return userService.updateUser(user);
+        return userService.updateUser(id, user);
     }
 
 
@@ -197,7 +210,7 @@ public class BookingFacadeImpl implements BookingFacade {
      * @param pageNum  Pagination param. Number of the page to return. Starts from 1.
      * @return List of Ticket objects.
      */
-    public List<Ticket> getBookedTickets(User user, int pageSize, int pageNum) {
+    public List<Ticket> getBookedTickets(User user, long pageSize, long pageNum) {
         logger.info("*** BookingFacade: Get booked tickets by user ");
         return ticketService.getBookedTickets(user, pageSize, pageNum);
     }
@@ -211,7 +224,7 @@ public class BookingFacadeImpl implements BookingFacade {
      * @param pageNum  Pagination param. Number of the page to return. Starts from 1.
      * @return List of Ticket objects.
      */
-    public List<Ticket> getBookedTickets(Event event, int pageSize, int pageNum) {
+    public List<Ticket> getBookedTickets(Event event, long pageSize, long pageNum) {
         logger.info("*** BookingFacade: Get booked tickets by event ");
         return ticketService.getBookedTickets(event, pageSize, pageNum);
     }
@@ -227,6 +240,42 @@ public class BookingFacadeImpl implements BookingFacade {
         return ticketService.cancelTicket(ticketId);
     }
 
+    public byte[] createPdf(long userId, long pageSize, long pageNum) throws IOException {
+        User user = getUserById(userId);
+        List<Ticket> bookedTickets = getBookedTickets(user, pageSize, pageNum);
+
+
+        PDDocument document = new PDDocument();
+        PDPage page = new PDPage();
+        document.addPage(page);
+
+        try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
+            contentStream.setFont(PDType1Font.COURIER, 10);
+            float height = page.getMediaBox().getHeight();
+
+            for (Ticket ticket : bookedTickets) {
+                contentStream.beginText();
+                height -= 30;
+                contentStream.newLineAtOffset(10, height);
+                contentStream.showText(ticket.toString());
+                contentStream.endText();
+            }
+        } catch (IOException e) {
+        }
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        document.save(byteArrayOutputStream);
+        byte[] bytes = byteArrayOutputStream.toByteArray();
+        document.close();
+        byteArrayOutputStream.close();
+        return bytes;
+    }
+
+
+    @Override
+    public Event updateEventName(int id, String eventName) {
+        return eventService.updateEventTitle(id, eventName);
+    }
 }
 
 

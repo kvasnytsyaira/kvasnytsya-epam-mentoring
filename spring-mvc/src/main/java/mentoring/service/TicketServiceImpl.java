@@ -19,19 +19,23 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public List<Ticket> getBookedTickets(User user, int pageSize, int pageNum) {
+    public List<Ticket> getBookedTickets(User user, long pageSize, long pageNum) {
         return storage.getTickets()
                 .values()
                 .stream()
                 .filter(ticket -> ticket.getUserId() == user.getId())
+                .skip((pageNum - 1) * pageSize)
+                .limit(pageSize)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Ticket> getBookedTickets(Event event, int pageSize, int pageNum) {
+    public List<Ticket> getBookedTickets(Event event, long pageSize, long pageNum) {
         return storage.getTickets().values()
                 .stream()
                 .filter(ticket -> event.getId() == ticket.getEventId())
+                .skip((pageNum - 1) * pageSize)
+                .limit(pageSize)
                 .collect(Collectors.toList());
     }
 
