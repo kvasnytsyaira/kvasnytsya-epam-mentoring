@@ -159,4 +159,5 @@ public interface BookingFacade {
 
     Event updateEventName(int id, String eventName);
 
+    List<Event> getAllEvents();
 }

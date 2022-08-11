@@ -20,4 +20,5 @@ public interface EventService {
 
     boolean deleteEvent(long eventId);
 
+    List<Event> getAllEvents();
 }

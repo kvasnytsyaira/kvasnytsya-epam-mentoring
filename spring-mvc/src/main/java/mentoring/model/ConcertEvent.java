@@ -2,12 +2,13 @@ package mentoring.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by maksym_govorischev.
  */
-public class ConcertEvent implements Event {
+public class ConcertEvent implements Event , Serializable {
 
     long id;
     String title;

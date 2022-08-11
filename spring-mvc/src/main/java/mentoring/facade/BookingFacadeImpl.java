@@ -276,6 +276,11 @@ public class BookingFacadeImpl implements BookingFacade {
     public Event updateEventName(int id, String eventName) {
         return eventService.updateEventTitle(id, eventName);
     }
+
+    @Override
+    public List<Event> getAllEvents() {
+        return eventService.getAllEvents();
+    }
 }
 
 

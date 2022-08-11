@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>Tickets List</title>
@@ -7,12 +8,6 @@
 </head>
 <body>
 <h1>Tickets List</h1>
-<div>
-    <nobr>
-        <%--        <a th:href="@{/contacts/add}">Add Contact</a> |--%>
-        <a th:href="@{/}">Back to Welcome</a>
-    </nobr>
-</div>
 <br/><br/>
 <div>
     <table border="1">
@@ -24,11 +19,11 @@
             <th>category</th>
         </tr>
         <tr th:each="ticket : ${tickets}">
-            <td th:utext="${ticket.id}">...</td>
-            <td th:utext="${ticket.eventId}">...</td>
-            <td th:utext="${ticket.place}">...</td>
-            <td th:utext="${ticket.userId}">...</td>
-            <td th:utext="${ticket.category}">...</td>
+            <td th:text="${ticket.id}">[...]</td>
+            <td th:text="${ticket.eventId}">[...]</td>
+            <td th:text="${ticket.place}">[...]</td>
+            <td th:text="${ticket.userId}">[...]</td>
+            <td th:text="${ticket.category}">[...]</td>
         </tr>
     </table>
 </div>

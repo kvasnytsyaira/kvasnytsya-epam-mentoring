@@ -1,7 +1,7 @@
 package mentoring;
 
-import mentoring.config.ApplicationConfig;
 import mentoring.config.RootConfig;
+import mentoring.config.WebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class Application extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -12,7 +12,7 @@ public class Application extends AbstractAnnotationConfigDispatcherServletInitia
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{ApplicationConfig.class};
+        return new Class[]{WebConfig.class};
     }
 
     @Override

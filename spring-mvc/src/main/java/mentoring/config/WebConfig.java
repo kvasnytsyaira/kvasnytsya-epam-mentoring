@@ -11,8 +11,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 @ComponentScan(basePackages = "mentoring")
 @EnableWebMvc
-public class ApplicationConfig {
-
+public class WebConfig {
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -22,7 +21,7 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public FacadeController facadeController(){
+    public FacadeController facadeController() {
         return new FacadeController();
     }
 }

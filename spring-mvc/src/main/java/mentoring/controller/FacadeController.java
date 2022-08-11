@@ -104,6 +104,12 @@ public class FacadeController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping(value = "/events", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String events(Model model) {
+        List<Event> events = bookingFacade.getAllEvents();
+        model.addAttribute("events", events);
+        return "events";
+    }
 
     @GetMapping(value = "/events/{eventId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Event> eventById(@PathVariable int eventId) {
