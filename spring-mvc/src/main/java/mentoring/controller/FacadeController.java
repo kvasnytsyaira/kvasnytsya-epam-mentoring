@@ -1,5 +1,6 @@
 package mentoring.controller;
 
+import mentoring.controller.exceptions.ValidationException;
 import mentoring.facade.BookingFacade;
 import mentoring.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,17 +11,24 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
 @Controller
+@Validated
 public class FacadeController {
     @Autowired
     BookingFacade bookingFacade;
 
+    @ExceptionHandler({ValidationException.class})
+    public void handle() {
+//
+    }
     /**
      * Simply selects the home view to render by returning its name.
      */
@@ -53,7 +61,7 @@ public class FacadeController {
 
 
     @PostMapping(value = "/tickets", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Ticket> bookTicket(@RequestBody OneDayTicket ticket) {
+    public ResponseEntity<Ticket> bookTicket(@RequestBody @Valid OneDayTicket ticket) {
         OneDayTicket ticket1 = (OneDayTicket) bookingFacade.bookTicket(ticket);
         return new ResponseEntity<>(ticket1, HttpStatus.CREATED);
     }
@@ -86,14 +94,14 @@ public class FacadeController {
     }
 
     @PostMapping(value = "/users")
-    public ResponseEntity<User> user(@RequestBody AdultUser user) {
+    public ResponseEntity<User> user(@RequestBody @Valid AdultUser user) {
         AdultUser user1 = (AdultUser) bookingFacade.createUser(user);
         return new ResponseEntity<>(user1, HttpStatus.CREATED);
     }
 
     @PutMapping("/users/{id}")
     public ResponseEntity<?> updateUser(@PathVariable long id,
-                                        @RequestBody @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) AdultUser user) {
+                                        @RequestBody @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)@Valid AdultUser user) {
         AdultUser user1 = (AdultUser) bookingFacade.updateUser(id, user);
         return new ResponseEntity<>(user1, HttpStatus.CREATED);
     }
@@ -134,14 +142,14 @@ public class FacadeController {
     }
 
     @PostMapping(value = "/events", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ConcertEvent> createEvent(@RequestBody @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) ConcertEvent event) {
+    public ResponseEntity<ConcertEvent> createEvent(@RequestBody @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @Valid ConcertEvent event) {
         ConcertEvent event1 = (ConcertEvent) bookingFacade.createEvent(event);
         return new ResponseEntity<>(event1, HttpStatus.CREATED);
     }
 
     @PutMapping("/events/{id}")
     public ResponseEntity<?> updateEvent(@PathVariable int id,
-                                         @RequestBody @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) ConcertEvent event) {
+                                         @RequestBody @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @Valid ConcertEvent event) {
         ConcertEvent event1 = (ConcertEvent) bookingFacade.updateEvent(id, event);
         return new ResponseEntity<>(event1, HttpStatus.CREATED);
     }

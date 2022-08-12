@@ -1,6 +1,6 @@
 package mentoring.facade;
 
-import mentoring.exceptions.RecordsNotFoundForSearchCriteriaException;
+import mentoring.controller.exceptions.RecordsNotFoundForSearchCriteriaException;
 import mentoring.model.Event;
 import mentoring.model.Ticket;
 import mentoring.model.User;

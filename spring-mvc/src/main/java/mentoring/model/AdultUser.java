@@ -1,8 +1,13 @@
 package mentoring.model;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 public class AdultUser implements User{
     long id;
+    @NotBlank(message = "Name is mandatory")
     String name;
+    @Email
     String email;
 
     @Override

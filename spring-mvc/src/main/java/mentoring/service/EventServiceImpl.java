@@ -1,6 +1,6 @@
 package mentoring.service;
 
-import mentoring.exceptions.RecordNotFoundException;
+import mentoring.controller.exceptions.RecordNotFoundException;
 import mentoring.model.Event;
 import mentoring.storingData.Storage;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,0 +1,43 @@
+###
+#TICKETS
+# get all tickets
+
+# get a ticket by id
+
+# get a list of tickets using an user id parameter
+
+# get a list of tickets using an event id parameter
+
+# book ticket
+
+# delete a ticket using an id parameter
+
+# pdf
+
+# update an item
+
+
+
+#USERS
+# get user by id
+
+# create user
+
+
+#EVENTS
+# get event by event id
+
+# get a list of events by title
+
+# get a list of events by date
+
+# create event
+
+# update event name event
+
+# update event
+
+# delete a ticket using an id parameter
+
+
+

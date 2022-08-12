@@ -2,17 +2,21 @@ package mentoring.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by maksym_govorischev.
  */
-public class ConcertEvent implements Event , Serializable {
+public class ConcertEvent implements Event, Serializable {
 
     long id;
+    @NotBlank(message = "Title is mandatory")
     String title;
     @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @Future(message = "You cannot create an event in the past!")
     Date date;
 
     /**

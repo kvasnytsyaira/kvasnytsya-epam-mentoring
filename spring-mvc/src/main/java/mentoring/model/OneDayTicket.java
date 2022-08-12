@@ -1,11 +1,15 @@
 package mentoring.model;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class OneDayTicket  implements Ticket{
 
     long id;
     long eventId;
     long userId;
     Category category;
+    @NotNull(message = "Place is mandatory")
     int place;
 
     @Override

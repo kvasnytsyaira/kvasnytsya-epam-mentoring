@@ -1,7 +1,7 @@
 package mentoring.service;
 
-import mentoring.exceptions.RecordNotFoundException;
-import mentoring.exceptions.RecordsNotFoundForSearchCriteriaException;
+import mentoring.controller.exceptions.RecordNotFoundException;
+import mentoring.controller.exceptions.RecordsNotFoundForSearchCriteriaException;
 import mentoring.model.User;
 import mentoring.storingData.Storage;
 import org.springframework.beans.factory.annotation.Autowired;
