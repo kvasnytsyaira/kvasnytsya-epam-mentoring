@@ -59,7 +59,7 @@ public class ConcertEvent implements Event, Serializable {
 
     @Override
     public String toString() {
-        return "id=" + id +
+        return "{ id=" + id +
                 ", title='" + title + '\'' +
                 ", date=" + date +
                 '}';
