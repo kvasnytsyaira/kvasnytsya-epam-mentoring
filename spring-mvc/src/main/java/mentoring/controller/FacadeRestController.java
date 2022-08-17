@@ -29,9 +29,9 @@ public class FacadeRestController {
     }
 
     @PostMapping(value = "/tickets", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Ticket> bookTicket(@RequestBody @Valid OneDayTicket ticket) {
-        OneDayTicket ticket1 = (OneDayTicket) bookingFacade.bookTicket(ticket);
-        return new ResponseEntity<>(ticket1, HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public void bookTicket(@RequestBody @Valid OneDayTicket ticket) {
+        bookingFacade.bookTicket(ticket);
     }
 
     @GetMapping(value = "/tickets/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
@@ -44,53 +44,57 @@ public class FacadeRestController {
     }
 
     @DeleteMapping(value = "/tickets/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<?> deleteTicket(@PathVariable long id) {
         bookingFacade.cancelTicket(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping(value = "/users/{id}")
-    public ResponseEntity<User> userById(@PathVariable int id) {
+    @ResponseStatus(HttpStatus.OK)
+    public User userById(@PathVariable int id) {
         User user = bookingFacade.getUserById(id);
-        return ResponseEntity.ok().body(user);
+        return user;
     }
 
     @GetMapping(value = "/users/email/{email}")
-    public ResponseEntity<User> userByEmail(@PathVariable String email) {
+    @ResponseStatus(HttpStatus.OK)
+    public User userByEmail(@PathVariable String email) {
         User user = bookingFacade.getUserByEmail(email);
-        return ResponseEntity.ok().body(user);
+        return user;
     }
 
     @PostMapping(value = "/users")
-    public ResponseEntity<User> user(@RequestBody @Valid AdultUser user) {
-        AdultUser user1 = (AdultUser) bookingFacade.createUser(user);
-        return new ResponseEntity<>(user1, HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public void user(@RequestBody @Valid AdultUser user) {
+        bookingFacade.createUser(user);
     }
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable long id,
-                                        @RequestBody @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @Valid AdultUser user) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateUser(@PathVariable long id,
+                           @RequestBody @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @Valid AdultUser user) {
         AdultUser user1 = (AdultUser) bookingFacade.updateUser(id, user);
-        return new ResponseEntity<>(user1, HttpStatus.CREATED);
     }
 
     @DeleteMapping(value = "/users/{userId}")
-    public ResponseEntity<?> deleteUser(@PathVariable int userId) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUser(@PathVariable int userId) {
         bookingFacade.deleteUser(userId);
-        return ResponseEntity.noContent().build();
     }
 
     @GetMapping(value = "/events/{eventId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Event> eventById(@PathVariable int eventId) {
+    @ResponseStatus(HttpStatus.OK)
+    public Event eventById(@PathVariable int eventId) {
         Event event = bookingFacade.getEventById(eventId);
-        return ResponseEntity.ok().body(event);
+        return event;
     }
 
 
     @PostMapping(value = "/events", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ConcertEvent> createEvent(@RequestBody @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @Valid ConcertEvent event) {
-        ConcertEvent event1 = (ConcertEvent) bookingFacade.createEvent(event);
-        return new ResponseEntity<>(event1, HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createEvent(@RequestBody @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @Valid ConcertEvent event) {
+        bookingFacade.createEvent(event);
     }
 
     @PutMapping("/events/{id}")
