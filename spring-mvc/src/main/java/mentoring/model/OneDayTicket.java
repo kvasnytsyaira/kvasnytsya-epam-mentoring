@@ -1,9 +1,13 @@
 package mentoring.model;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
-public class OneDayTicket  implements Ticket{
+@XmlRootElement(name = "ticket")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class OneDayTicket implements Ticket {
 
     long id;
     long eventId;
@@ -82,7 +86,7 @@ public class OneDayTicket  implements Ticket{
 
     @Override
     public String toString() {
-        return "id=" + id +
+        return "{ id=" + id +
                 ", eventId=" + eventId +
                 ", userId=" + userId +
                 ", category=" + category +

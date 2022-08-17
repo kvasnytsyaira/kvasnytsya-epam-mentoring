@@ -4,6 +4,7 @@ import mentoring.model.Event;
 import mentoring.model.Ticket;
 import mentoring.model.User;
 
+import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -160,4 +161,6 @@ public interface BookingFacade {
     Event updateEventName(int id, String eventName);
 
     List<Event> getAllEvents();
+
+    void preloadTickets() throws JAXBException;
 }

@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
 @RestController
@@ -26,6 +27,12 @@ public class FacadeRestController {
     @ExceptionHandler({ValidationException.class})
     public void handle() {
 //
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/tickets/preload")
+    public void preloadTickets() throws JAXBException {
+        bookingFacade.preloadTickets();
     }
 
     @PostMapping(value = "/tickets", produces = MediaType.APPLICATION_JSON_VALUE)

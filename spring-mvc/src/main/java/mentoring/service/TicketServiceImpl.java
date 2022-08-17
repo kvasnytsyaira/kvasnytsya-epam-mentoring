@@ -4,14 +4,19 @@ import mentoring.model.Event;
 import mentoring.model.Ticket;
 import mentoring.model.User;
 import mentoring.storingData.Storage;
+import mentoring.utills.XMLUnmarshaller;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.xml.bind.JAXBException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class TicketServiceImpl implements TicketService {
     @Autowired
     private Storage storage;
+
+    @Autowired
+    private XMLUnmarshaller unmarshaller;
 
     @Override
     public Ticket bookTicket(Ticket ticket) {
@@ -42,5 +47,11 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public boolean cancelTicket(long ticketId) {
         return storage.removeTicket(ticketId);
+    }
+
+    @Override
+    public void preloadTickets() throws JAXBException {
+        List<Ticket> tickets = unmarshaller.loadTickets();
+        tickets.forEach((ticket) -> storage.save(ticket));
     }
 }

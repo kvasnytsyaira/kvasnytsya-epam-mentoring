@@ -4,6 +4,7 @@ import mentoring.model.Event;
 import mentoring.model.Ticket;
 import mentoring.model.User;
 
+import javax.xml.bind.JAXBException;
 import java.util.List;
 
 public interface TicketService {
@@ -15,4 +16,6 @@ public interface TicketService {
     List<Ticket> getBookedTickets(Event event, long pageSize, long pageNum);
 
     boolean cancelTicket(long ticketId);
+
+    void preloadTickets() throws JAXBException;
 }

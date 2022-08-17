@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tickets>
+    <ticket>
+        <id>1111</id>
+        <userId>1</userId>
+        <eventId>1</eventId>
+        <category>Category.BAR</category>
+        <place>99</place>
+    </ticket>
+    <ticket>
+        <id>1112</id>
+        <userId>1</userId>
+        <eventId>1</eventId>
+        <category>Category.BAR</category>
+        <place>999</place>
+    </ticket>
+</tickets>

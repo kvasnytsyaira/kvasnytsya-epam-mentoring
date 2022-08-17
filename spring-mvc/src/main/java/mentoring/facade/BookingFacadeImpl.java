@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.xml.bind.JAXBException;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Date;
@@ -280,6 +281,11 @@ public class BookingFacadeImpl implements BookingFacade {
     @Override
     public List<Event> getAllEvents() {
         return eventService.getAllEvents();
+    }
+
+    @Override
+    public void preloadTickets() throws JAXBException {
+        ticketService.preloadTickets();
     }
 }
 
