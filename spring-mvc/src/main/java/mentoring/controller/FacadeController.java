@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -81,9 +81,11 @@ public class FacadeController {
     }
 
     @GetMapping("/events/date/{date}")
-    public String eventsByDate(Model model, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date,
+    public String eventsByDate(Model model, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") String date,
                                @RequestParam("page-size") long pageSize, @RequestParam("page-num") long pageNum) {
-        List<Event> events = bookingFacade.getEventsForDay(date, pageSize, pageNum);
+        System.out.println(date);
+        LocalDate filterDate = LocalDate.parse(date);
+        List<Event> events = bookingFacade.getEventsForDay(filterDate, pageSize, pageNum);
         model.addAttribute("events", events);
         model.addAttribute("title", "Events by date : " + date);
         return "events";

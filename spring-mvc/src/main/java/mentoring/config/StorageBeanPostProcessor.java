@@ -6,8 +6,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,17 +48,17 @@ public class StorageBeanPostProcessor implements BeanPostProcessor {
     Map<String, Ticket> ticketsFull = new HashMap<>();
 
     private void insertEvents() {
-        Event event1 = new ConcertEvent(1, "1 Concert", new Date(2022, Calendar.JANUARY, 1));
+        Event event1 = new ConcertEvent(1, "1 Concert", LocalDate.of(2023, 1, 1));
         eventsFull.put("event:" + event1.getId(), event1);
-        Event event2 = new ConcertEvent(2, "2 Concert", new Date(2022, Calendar.JANUARY, 2));
+        Event event2 = new ConcertEvent(2, "2 Concert", LocalDate.of(2023, 1, 2));
         eventsFull.put("event:" + event2.getId(), event2);
-        Event event3 = new ConcertEvent(3, "3 Concert", new Date(2022, Calendar.JANUARY, 3));
+        Event event3 = new ConcertEvent(3, "3 Concert", LocalDate.of(2023, 1, 3));
         eventsFull.put("event:" + event3.getId(), event3);
-        Event event4 = new ConcertEvent(4, "4 Concert", new Date(2022, Calendar.JANUARY, 4));
+        Event event4 = new ConcertEvent(4, "4 Concert", LocalDate.of(2023, 1, 4));
         eventsFull.put("event:" + event4.getId(), event4);
-        Event event5 = new ConcertEvent(5, "5 Concert", new Date(2022, Calendar.JANUARY, 5));
+        Event event5 = new ConcertEvent(5, "5 Concert", LocalDate.of(2023, 1, 5));
         eventsFull.put("event:" + event5.getId(), event5);
-        Event event6 = new ConcertEvent(6, "6 Concert", new Date(2022, Calendar.JANUARY, 6));
+        Event event6 = new ConcertEvent(6, "6 Concert", LocalDate.of(2023, 1, 6));
         eventsFull.put("event:" + event6.getId(), event6);
     }
 

@@ -5,6 +5,7 @@ import mentoring.model.Event;
 import mentoring.storingData.Storage;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -33,11 +34,11 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> getEventsForDay(Date date, long pageSize, long pageNum) {
+    public List<Event> getEventsForDay(LocalDate date, long pageSize, long pageNum) {
         return storage.getEvents()
                 .values()
                 .stream()
-                .filter(event -> event.getDate().compareTo(date) == 0)
+                .filter(event -> event.getDate().isEqual(date))
                 .skip((pageNum - 1) * pageSize)
                 .limit(pageSize)
                 .collect(Collectors.toList());

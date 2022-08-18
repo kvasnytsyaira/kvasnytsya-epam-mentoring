@@ -2,7 +2,7 @@ package mentoring.service;
 
 import mentoring.model.Event;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface EventService {
@@ -11,7 +11,7 @@ public interface EventService {
 
     List<Event> getEventsByTitle(String title, long pageSize, long pageNum);
 
-    List<Event> getEventsForDay(Date date, long pageSize, long pageNum);
+    List<Event> getEventsForDay(LocalDate date, long pageSize, long pageNum);
 
     Event createEvent(Event event);
 

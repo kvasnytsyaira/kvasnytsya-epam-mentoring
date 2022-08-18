@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -17,7 +18,7 @@ public class ConcertEvent implements Event, Serializable {
     String title;
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     @Future(message = "You cannot create an event in the past!")
-    Date date;
+    LocalDate date;
 
     /**
      * Event id. UNIQUE.
@@ -40,18 +41,18 @@ public class ConcertEvent implements Event, Serializable {
         this.title = title;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
     public ConcertEvent() {
     }
 
-    public ConcertEvent(long id, String title, Date date) {
+    public ConcertEvent(long id, String title, LocalDate date) {
         this.id = id;
         this.title = title;
         this.date = date;

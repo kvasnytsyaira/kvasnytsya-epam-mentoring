@@ -1,6 +1,6 @@
 package mentoring.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public interface Event {
     /**
@@ -16,7 +16,7 @@ public interface Event {
 
     public void setTitle(String title);
 
-    public Date getDate();
+    public LocalDate getDate();
 
-    public void setDate(Date date);
+    public void setDate(LocalDate date);
 }

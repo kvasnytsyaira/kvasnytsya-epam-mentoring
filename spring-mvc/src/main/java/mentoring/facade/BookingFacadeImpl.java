@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.xml.bind.JAXBException;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class BookingFacadeImpl implements BookingFacade {
@@ -72,7 +72,7 @@ public class BookingFacadeImpl implements BookingFacade {
      * @param pageNum  Pagination param. Number of the page to return. Starts from 1.
      * @return List of events.
      */
-    public List<Event> getEventsForDay(Date day, long pageSize, long pageNum) {
+    public List<Event> getEventsForDay(LocalDate day, long pageSize, long pageNum) {
         logger.info("*** BookingFacade: Get event for day");
         List<Event> eventsByDate = eventService.getEventsForDay(day, pageSize, pageNum);
         if (eventsByDate.size() > 0) {

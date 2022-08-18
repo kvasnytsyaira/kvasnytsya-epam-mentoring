@@ -6,6 +6,7 @@ import mentoring.model.User;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public interface BookingFacade {
      * @param pageNum  Pagination param. Number of the page to return. Starts from 1.
      * @return List of events.
      */
-    List<Event> getEventsForDay(Date day, long pageSize, long pageNum);
+    List<Event> getEventsForDay(LocalDate day, long pageSize, long pageNum);
 
     /**
      * Creates new event. Event id should be auto-generated.
