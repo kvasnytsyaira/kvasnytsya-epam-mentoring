@@ -85,7 +85,7 @@ GET http://localhost:8080/api/events/2
 
 ###
 # get a list of events by title
-GET http://localhost:8080/api/events/title/Concert%20%1?page-size=1&page-num=1
+GET http://localhost:8080/api/events/title/1%20Concert?page-size=1&page-num=1
 
 ###
 # get a list of events by date

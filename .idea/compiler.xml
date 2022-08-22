@@ -9,15 +9,16 @@
         <outputRelativeToContentRoot value="true" />
         <module name="jmp.cloud.service.impl" />
         <module name="task7" />
-        <module name="database" />
-        <module name="jmp.bank.api" />
-        <module name="spring-core" />
         <module name="spring-mvc" />
-        <module name="application" />
         <module name="jmp.service.api" />
         <module name="testing" />
         <module name="jmp.dto" />
         <module name="Task-5" />
+        <module name="spring-data-access" />
+        <module name="database" />
+        <module name="jmp.bank.api" />
+        <module name="spring-core" />
+        <module name="application" />
         <module name="jmp.cloud.bank.impl" />
       </profile>
     </annotationProcessing>
@@ -27,6 +28,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="spring-data-access" options="-parameters" />
       <module name="task7" options="" />
     </option>
   </component>

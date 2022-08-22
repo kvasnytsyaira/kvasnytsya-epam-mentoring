@@ -22,6 +22,7 @@
         <module>database</module>
         <module>spring-core</module>
         <module>spring-mvc</module>
+        <module>spring-data-access</module>
     </modules>
 
     <dependencies></dependencies>
