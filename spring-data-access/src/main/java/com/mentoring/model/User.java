@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Data
 @AllArgsConstructor
@@ -17,13 +20,21 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
+
     @NotBlank(message = "Name is mandatory")
     @Column(name = "user_name")
     String name;
+
     @Email
     @Column(name = "user_email")
     String email;
 
+    @OneToOne
+    @JoinColumn(name = "id", referencedColumnName = "user_id")
+    UserAccount userAccount;
+
+    @OneToMany(mappedBy = "user")
+    List<Ticket> tickets = new ArrayList<>();
 
     public User(String name, String email) {
         this.name = name;

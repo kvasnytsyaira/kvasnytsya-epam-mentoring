@@ -1,9 +1,14 @@
 package com.mentoring.controller;
 
+import com.mentoring.dto.EventDto;
+import com.mentoring.dto.TicketDTO;
+import com.mentoring.dto.UserAccountDTO;
+import com.mentoring.dto.UserDTO;
 import com.mentoring.facade.BookingFacade;
 import com.mentoring.model.Event;
 import com.mentoring.model.Ticket;
 import com.mentoring.model.User;
+import com.mentoring.model.UserAccount;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -34,48 +39,46 @@ public class MainController {
     public String welcome() {
         return "welcome";
     }
-
     @GetMapping(value = "/users/{userId}/tickets")
-    public List<Ticket> ticketsByUser(Model model, @PathVariable int userId,
-                                      @RequestParam("page-size") long pageSize, @RequestParam("page-num") long pageNum) {
+    public List<TicketDTO> ticketsByUser(Model model, @PathVariable int userId,
+                                         @RequestParam("page-size") long pageSize, @RequestParam("page-num") long pageNum) {
         User userById = bookingFacade.getUserById(userId);
-        List<Ticket> bookedTickets = bookingFacade.getBookedTickets(userById, pageSize, pageNum);
+        List<TicketDTO> bookedTickets = bookingFacade.getBookedTickets(userById, pageSize, pageNum);
         return bookedTickets;
     }
-
     @GetMapping(value = "/events/{eventId}/tickets")
-    public List<Ticket> ticketsByEvent(Model model, @PathVariable int eventId,
-                                       @RequestParam("page-size") long pageSize, @RequestParam("page-num") long pageNum) {
+    public List<TicketDTO> ticketsByEvent(Model model, @PathVariable int eventId,
+                                          @RequestParam("page-size") long pageSize, @RequestParam("page-num") long pageNum) {
         Event event = bookingFacade.getEventById(eventId);
-        List<Ticket> bookedTickets = bookingFacade.getBookedTickets(event, pageSize, pageNum);
+        List<TicketDTO> bookedTickets = bookingFacade.getBookedTickets(event, pageSize, pageNum);
         return bookedTickets;
     }
 
     @GetMapping(value = "/events", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Event> events(Model model) {
-        List<Event> events = bookingFacade.getAllEvents();
+    public List<EventDto> events() {
+        List<EventDto> events = bookingFacade.getAllEvents();
         return events;
     }
 
 
     @GetMapping("/events/title/{title}")
-    public List<Event> eventsByTitle(Model model, @PathVariable String title,
-                                     @RequestParam("page-size") long pageSize, @RequestParam("page-num") long pageNum) {
-        List<Event> events = bookingFacade.getEventsByTitle(title, pageSize, pageNum);
+    public List<EventDto> eventsByTitle(@PathVariable String title,
+                                        @RequestParam("page-size") long pageSize, @RequestParam("page-num") long pageNum) {
+        List<EventDto> events = bookingFacade.getEventsByTitle(title, pageSize, pageNum);
         return events;
     }
 
     @GetMapping("/events/date/{date}")
-    public List<Event> eventsByDate(Model model, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") String date,
-                                    @RequestParam("page-size") long pageSize, @RequestParam("page-num") long pageNum) {
+    public List<EventDto> eventsByDate(Model model, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") String date,
+                                       @RequestParam("page-size") long pageSize, @RequestParam("page-num") long pageNum) {
         LocalDate filterDate = LocalDate.parse(date);
-        List<Event> events = bookingFacade.getEventsForDay(filterDate, pageSize, pageNum);
+        List<EventDto> events = bookingFacade.getEventsForDay(filterDate, pageSize, pageNum);
         return events;
     }
 
     @PostMapping(value = "/tickets", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public void bookTicket(@RequestBody @Valid Ticket ticket) {
+    public void bookTicket(@RequestBody @Valid TicketDTO ticket) {
         bookingFacade.bookTicket(ticket);
     }
 
@@ -89,29 +92,29 @@ public class MainController {
 
     @GetMapping(value = "/users/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public User userById(@PathVariable int id) {
-        User user = bookingFacade.getUserById(id);
+    public UserDTO userById(@PathVariable int id) {
+        UserDTO user = bookingFacade.getUserDTOById(id);
         return user;
     }
 
     @GetMapping(value = "/users/email/{email}")
     @ResponseStatus(HttpStatus.OK)
-    public User userByEmail(@PathVariable String email) {
-        User user = bookingFacade.getUserByEmail(email);
+    public UserDTO userByEmail(@PathVariable String email) {
+        UserDTO user = bookingFacade.getUserByEmail(email);
         return user;
     }
 
     @PostMapping(value = "/users")
     @ResponseStatus(HttpStatus.CREATED)
-    public void user(@RequestBody @Valid User user) {
+    public void user(@RequestBody @Valid UserDTO user) {
         bookingFacade.createUser(user);
     }
 
     @PutMapping("/users/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateUser(@PathVariable long id,
-                           @RequestBody @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @Valid User user) {
-        User user1 = (User) bookingFacade.updateUser(id, user);
+                           @RequestBody @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @Valid UserDTO user) {
+        UserDTO user1 = (UserDTO) bookingFacade.updateUser(id, user);
     }
 
     @DeleteMapping(value = "/users/{userId}")
@@ -120,30 +123,36 @@ public class MainController {
         bookingFacade.deleteUser(userId);
     }
 
+    @PostMapping(value = "/account")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void account(@RequestBody @Valid UserAccountDTO account) {
+        bookingFacade.createUserAccount(account);
+    }
+
     @GetMapping(value = "/events/{eventId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public Event eventById(@PathVariable int eventId) {
-        Event event = bookingFacade.getEventById(eventId);
+    public EventDto eventById(@PathVariable int eventId) {
+        EventDto event = bookingFacade.getEventDTOById(eventId);
         return event;
     }
 
 
     @PostMapping(value = "/events", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public void createEvent(@RequestBody @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @Valid Event event) {
+    public void createEvent(@RequestBody @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @Valid EventDto event) {
         bookingFacade.createEvent(event);
     }
 
     @PutMapping("/events/{id}")
     public ResponseEntity<?> updateEvent(@PathVariable int id,
-                                         @RequestBody @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @Valid Event event) {
-        Event event1 = (Event) bookingFacade.updateEvent(id, event);
+                                         @RequestBody @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @Valid EventDto event) {
+        EventDto event1 = (EventDto) bookingFacade.updateEvent(id, event);
         return new ResponseEntity<>(event1, HttpStatus.CREATED);
     }
 
     @PatchMapping("/events/{id}")
-    public ResponseEntity<Event> updateEventName(@PathVariable int id, @RequestBody String name) {
-        Event event1 = (Event) bookingFacade.updateEventName(id, name);
+    public ResponseEntity<EventDto> updateEventName(@PathVariable int id, @RequestBody String name) {
+        EventDto event1 = (EventDto) bookingFacade.updateEventName(id, name);
         return ResponseEntity.ok().body(event1);
     }
 

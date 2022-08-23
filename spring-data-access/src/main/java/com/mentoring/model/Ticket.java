@@ -17,33 +17,28 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NoArgsConstructor
 @Entity
 @Table(name = "tickets")
-public class Ticket{
+public class Ticket {
 
     public enum Category {STANDARD, PREMIUM, BAR}
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-    long eventId;
-    long userId;
+    @ManyToOne
+    @JoinColumn(name = "event_id")
+    Event event;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    User user;
+    @Enumerated
     Category category;
-    @NotNull(message = "Place is mandatory")
     int place;
 
 
-    public Ticket(long eventId, long userId, Category category, int place) {
-        this.eventId = eventId;
-        this.userId = userId;
+    public Ticket(Event event, User user, Category category, int place) {
+        this.event = event;
+        this.user = user;
         this.category = category;
         this.place = place;
-    }
-
-    @Override
-    public String toString() {
-        return "{ id=" + id +
-                ", eventId=" + eventId +
-                ", userId=" + userId +
-                ", category=" + category +
-                ", place=" + place +
-                '}';
     }
 }

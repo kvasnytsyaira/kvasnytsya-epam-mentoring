@@ -26,16 +26,18 @@ public class Event implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-    @NotBlank(message = "Title is mandatory")
     String title;
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
-    @Future(message = "You cannot create an event in the past!")
-            @Column(name = "event_date")
+    @Column(name = "event_date")
     LocalDate date;
 
     int price;
 
-    @OneToMany
+    @OneToMany(mappedBy = "event")
     List<Ticket> ticketList = new ArrayList<>();
 
+    public Event(String title, LocalDate date, int price) {
+        this.title = title;
+        this.date = date;
+        this.price = price;
+    }
 }

@@ -1,13 +1,21 @@
 package com.mentoring.facade;
 
+import com.mentoring.dto.EventDto;
+import com.mentoring.dto.TicketDTO;
+import com.mentoring.dto.UserAccountDTO;
+import com.mentoring.dto.UserDTO;
 import com.mentoring.exception.RecordsNotFoundForSearchCriteriaException;
 import com.mentoring.model.Event;
 import com.mentoring.model.Ticket;
 import com.mentoring.model.User;
+import com.mentoring.model.UserAccount;
 import com.mentoring.service.EventServiceImpl;
 import com.mentoring.service.TicketServiceImpl;
+import com.mentoring.service.UserAccountServiceImpl;
 import com.mentoring.service.UserServiceImpl;
+import com.mentoring.utills.MainUtil;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.UserDatabase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -23,6 +31,9 @@ public class BookingFacadeImpl implements BookingFacade {
     private final EventServiceImpl eventService;
     private final UserServiceImpl userService;
     private final TicketServiceImpl ticketService;
+    private final UserAccountServiceImpl userAccountService;
+
+    private final MainUtil util;
 
 
     /**
@@ -35,6 +46,11 @@ public class BookingFacadeImpl implements BookingFacade {
         return eventService.getEventById(eventId);
     }
 
+    public EventDto getEventDTOById(long eventId) {
+        logger.info("*** BookingFacade: Get event by id");
+        return eventService.getEventDTOById(eventId);
+    }
+
     /**
      * Get list of events by matching title. Title is matched using 'contains' approach.
      * In case nothing was found, empty list is returned.
@@ -44,9 +60,9 @@ public class BookingFacadeImpl implements BookingFacade {
      * @param pageNum  Pagination param. Number of the page to return. Starts from 1.
      * @return List of events.
      */
-    public List<Event> getEventsByTitle(String title, long pageSize, long pageNum) {
+    public List<EventDto> getEventsByTitle(String title, long pageSize, long pageNum) {
         logger.info("*** BookingFacade: Get event by title");
-        List<Event> eventsByTitle = eventService.getEventsByTitle(title, pageSize, pageNum);
+        List<EventDto> eventsByTitle = eventService.getEventsByTitle(title, pageSize, pageNum);
         if (eventsByTitle.size() > 0) {
             return eventsByTitle;
         } else throw new RecordsNotFoundForSearchCriteriaException("No events with title " + title + " found");
@@ -62,9 +78,9 @@ public class BookingFacadeImpl implements BookingFacade {
      * @param pageNum  Pagination param. Number of the page to return. Starts from 1.
      * @return List of events.
      */
-    public List<Event> getEventsForDay(LocalDate day, long pageSize, long pageNum) {
+    public List<EventDto> getEventsForDay(LocalDate day, long pageSize, long pageNum) {
         logger.info("*** BookingFacade: Get event for day");
-        List<Event> eventsByDate = eventService.getEventsForDay(day, pageSize, pageNum);
+        List<EventDto> eventsByDate = eventService.getEventsForDay(day, pageSize, pageNum);
         if (eventsByDate.size() > 0) {
             return eventsByDate;
         } else throw new RecordsNotFoundForSearchCriteriaException("No events with date " + day + " found");
@@ -77,7 +93,7 @@ public class BookingFacadeImpl implements BookingFacade {
      * @param event Event data.
      * @return Created Event object.
      */
-    public Event createEvent(Event event) {
+    public EventDto createEvent(EventDto event) {
         logger.info("*** BookingFacade: Create event");
         return eventService.createEvent(event);
     }
@@ -89,7 +105,7 @@ public class BookingFacadeImpl implements BookingFacade {
      * @param event Event data for update. Should have id set.
      * @return Updated Event object.
      */
-    public Event updateEvent(long eventId, Event event) {
+    public EventDto updateEvent(long eventId, EventDto event) {
         logger.info("*** BookingFacade: Update event ");
         return eventService.updateEvent(eventId, event);
     }
@@ -106,25 +122,38 @@ public class BookingFacadeImpl implements BookingFacade {
         eventService.deleteEvent(eventId);
     }
 
+    @Override
+    public EventDto updateEventName(int id, String eventName) {
 
+        return eventService.updateEventTitle(id, eventName);
+    }
+
+    @Override
+    public List<EventDto> getAllEvents() {
+        return eventService.getAllEvents();
+    }
     /**
      * Gets user by its id.
      *
      * @return User.
      */
+    public UserDTO getUserDTOById(long userId) {
+
+        logger.info("*** BookingFacade: Get user by id");
+        return userService.getUserDTOById(userId);
+    }
     public User getUserById(long userId) {
 
         logger.info("*** BookingFacade: Get user by id");
         return userService.getUserById(userId);
     }
 
-
     /**
      * Gets user by its email. Email is strictly matched.
      *
      * @return User.
      */
-    public User getUserByEmail(String email) {
+    public UserDTO getUserByEmail(String email) {
         logger.info("*** BookingFacade: Get user by user");
         return userService.getUserByEmail(email);
     }
@@ -139,7 +168,7 @@ public class BookingFacadeImpl implements BookingFacade {
      * @param pageNum  Pagination param. Number of the page to return. Starts from 1.
      * @return List of users.
      */
-    public List<User> getUsersByName(String name, long pageSize, long pageNum) {
+    public List<UserDTO> getUsersByName(String name, long pageSize, long pageNum) {
         logger.info("*** BookingFacade: Get users by name");
         return userService.getUsersByName(name, pageSize, pageNum);
     }
@@ -151,7 +180,7 @@ public class BookingFacadeImpl implements BookingFacade {
      * @param user User data.
      * @return Created User object.
      */
-    public User createUser(User user) {
+    public UserDTO createUser(UserDTO user) {
         logger.info("*** BookingFacade: Create user ");
         return userService.createUser(user);
     }
@@ -163,7 +192,7 @@ public class BookingFacadeImpl implements BookingFacade {
      * @param user User data for update. Should have id set.
      * @return Updated User object.
      */
-    public User updateUser(long id, User user) {
+    public UserDTO updateUser(long id, UserDTO user) {
         logger.info("*** BookingFacade: Update user ");
         return userService.updateUser(id, user);
     }
@@ -180,6 +209,10 @@ public class BookingFacadeImpl implements BookingFacade {
         userService.deleteUser(userId);
     }
 
+    @Override
+    public UserAccountDTO createUserAccount(UserAccountDTO account) {
+        return userAccountService.createUserAccount(account);
+    }
 
     /**
      * Book ticket for a specified event on behalf of specified user.
@@ -188,7 +221,7 @@ public class BookingFacadeImpl implements BookingFacade {
      * @return Booked ticket object.
      * @throws IllegalStateException if this place has already been booked.
      */
-    public Ticket bookTicket(Ticket ticket) {
+    public TicketDTO bookTicket(TicketDTO ticket) {
         logger.info("*** BookingFacade: Book ticket ");
         return ticketService.bookTicket(ticket);
     }
@@ -201,7 +234,7 @@ public class BookingFacadeImpl implements BookingFacade {
      * @param pageNum  Pagination param. Number of the page to return. Starts from 1.
      * @return List of Ticket objects.
      */
-    public List<Ticket> getBookedTickets(User user, long pageSize, long pageNum) {
+    public List<TicketDTO> getBookedTickets(User user, long pageSize, long pageNum) {
         logger.info("*** BookingFacade: Get booked tickets by user ");
         return ticketService.getBookedTickets(user, pageSize, pageNum);
     }
@@ -215,7 +248,7 @@ public class BookingFacadeImpl implements BookingFacade {
      * @param pageNum  Pagination param. Number of the page to return. Starts from 1.
      * @return List of Ticket objects.
      */
-    public List<Ticket> getBookedTickets(Event event, long pageSize, long pageNum) {
+    public List<TicketDTO> getBookedTickets(Event event, long pageSize, long pageNum) {
         logger.info("*** BookingFacade: Get booked tickets by event ");
         return ticketService.getBookedTickets(event, pageSize, pageNum);
     }
@@ -231,17 +264,4 @@ public class BookingFacadeImpl implements BookingFacade {
         ticketService.cancelTicket(ticketId);
     }
 
-    @Override
-    public Event updateEventName(int id, String eventName) {
-        return eventService.updateEventTitle(id, eventName);
-    }
-
-    @Override
-    public List<Event> getAllEvents() {
-        return eventService.getAllEvents();
-    }
-
-
 }
-
-

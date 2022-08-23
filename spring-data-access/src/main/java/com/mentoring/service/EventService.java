@@ -1,23 +1,25 @@
 package com.mentoring.service;
 
+import com.mentoring.dto.EventDto;
 import com.mentoring.model.Event;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public interface EventService {
+    EventDto getEventDTOById(long eventId);
     Event getEventById(long eventId);
 
-    List<Event> getEventsByTitle(String title, long pageSize, long pageNum);
+    List<EventDto> getEventsByTitle(String title, long pageSize, long pageNum);
 
-    List<Event> getEventsForDay(LocalDate date, long pageSize, long pageNum);
+    List<EventDto> getEventsForDay(LocalDate date, long pageSize, long pageNum);
 
-    Event createEvent(Event event);
+    EventDto createEvent(EventDto event);
 
-    Event updateEvent(long eventId , Event event);
-    Event updateEventTitle(long id, String title);
+    EventDto updateEvent(long eventId , EventDto event);
+    EventDto updateEventTitle(long id, String title);
 
     void deleteEvent(long eventId);
 
-    List<Event> getAllEvents();
+    List<EventDto> getAllEvents();
 }

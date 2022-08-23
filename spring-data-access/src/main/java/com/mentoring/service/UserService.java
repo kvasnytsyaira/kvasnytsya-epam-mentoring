@@ -1,5 +1,6 @@
 package com.mentoring.service;
 
+import com.mentoring.dto.UserDTO;
 import com.mentoring.model.User;
 
 import java.util.List;
@@ -7,14 +8,15 @@ import java.util.List;
 public interface UserService {
 
     User getUserById(long userId);
+    UserDTO getUserDTOById(long userId);
 
-    User getUserByEmail(String email);
+    UserDTO getUserByEmail(String email);
 
-    List<User> getUsersByName(String name, long pageSize, long pageNum);
+    List<UserDTO> getUsersByName(String name, long pageSize, long pageNum);
 
-    User createUser(User user);
+    UserDTO createUser(UserDTO user);
 
-    User updateUser(long id, User user);
+    UserDTO updateUser(long id, UserDTO user);
 
     void deleteUser(long userId);
 }

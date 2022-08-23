@@ -1,8 +1,10 @@
 package com.mentoring.service;
 
+import com.mentoring.dto.EventDto;
 import com.mentoring.exception.RecordNotFoundException;
 import com.mentoring.model.Event;
 import com.mentoring.repository.EventRepository;
+import com.mentoring.utills.MainUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 public class EventServiceImpl implements EventService {
 
     private final EventRepository eventRepository;
+    private final MainUtil util;
 
     @Override
     public Event getEventById(long eventId) {
@@ -24,43 +27,49 @@ public class EventServiceImpl implements EventService {
                 .orElseThrow(() -> new RecordNotFoundException("Event with such id does not exist!"));
     }
 
-    @Override
-    public List<Event> getEventsByTitle(String title, long pageSize, long pageNum) {
-        return eventRepository.findAll().stream()
-                .filter(event -> Objects.equals(event.getTitle().toLowerCase(), title.toLowerCase()))
-                .skip((pageNum - 1) * pageSize)
-                .limit(pageSize)
-                .collect(Collectors.toList());
+    public EventDto getEventDTOById(long eventId) {
+        return util.convertEntityToDto(eventRepository.findById(eventId)
+                .orElseThrow(() -> new RecordNotFoundException("Event with such id does not exist!")));
     }
 
     @Override
-    public List<Event> getEventsForDay(LocalDate date, long pageSize, long pageNum) {
-        return eventRepository.findAll()
+    public List<EventDto> getEventsByTitle(String title, long pageSize, long pageNum) {
+        return util.convertEntityEventsToDto(eventRepository.findAll().stream()
+                .filter(event -> Objects.equals(event.getTitle().toLowerCase(), title.toLowerCase()))
+                .skip((pageNum - 1) * pageSize)
+                .limit(pageSize)
+                .collect(Collectors.toList()));
+    }
+
+    @Override
+    public List<EventDto> getEventsForDay(LocalDate date, long pageSize, long pageNum) {
+        return util.convertEntityEventsToDto(eventRepository.findAll()
                 .stream()
                 .filter(event -> event.getDate().isEqual(date))
                 .skip((pageNum - 1) * pageSize)
                 .limit(pageSize)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     @Override
-    public Event createEvent(Event event) {
-        return eventRepository.save(event);
+    public EventDto createEvent(EventDto event) {
+        Event savedEvent = eventRepository.save(util.convertDtoToEntity(event));
+        return util.convertEntityToDto(savedEvent);
     }
 
     @Override
-    public Event updateEvent(long id, Event eventNew) {
+    public EventDto updateEvent(long id, EventDto eventNew) {
         Event event = eventRepository.findById(id).get();
         event.setTitle(eventNew.getTitle());
         event.setDate(eventNew.getDate());
-        return eventRepository.save(event);
+        return util.convertEntityToDto(eventRepository.save(event));
     }
 
     @Override
-    public Event updateEventTitle(long id, String title) {
+    public EventDto updateEventTitle(long id, String title) {
         Event event = eventRepository.findById(id).get();
         event.setTitle(title);
-        return eventRepository.save(event);
+        return util.convertEntityToDto(eventRepository.save(event));
     }
 
     @Override
@@ -70,7 +79,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> getAllEvents() {
-        return new ArrayList<>(eventRepository.findAll());
+    public List<EventDto> getAllEvents() {
+        return util.convertEntityEventsToDto(new ArrayList<>(eventRepository.findAll()));
     }
 }

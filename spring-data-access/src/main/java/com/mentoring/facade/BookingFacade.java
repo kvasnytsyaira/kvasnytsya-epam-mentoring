@@ -1,7 +1,10 @@
 package com.mentoring.facade;
 
+import com.mentoring.dto.EventDto;
+import com.mentoring.dto.TicketDTO;
+import com.mentoring.dto.UserAccountDTO;
+import com.mentoring.dto.UserDTO;
 import com.mentoring.model.Event;
-import com.mentoring.model.Ticket;
 import com.mentoring.model.User;
 
 import java.time.LocalDate;
@@ -18,6 +21,7 @@ public interface BookingFacade {
      *
      * @return Event.
      */
+    EventDto getEventDTOById(long eventId);
     Event getEventById(long eventId);
 
     /**
@@ -29,7 +33,7 @@ public interface BookingFacade {
      * @param pageNum  Pagination param. Number of the page to return. Starts from 1.
      * @return List of events.
      */
-    List<Event> getEventsByTitle(String title, long pageSize, long pageNum);
+    List<EventDto> getEventsByTitle(String title, long pageSize, long pageNum);
 
     /**
      * Get list of events for specified day.
@@ -40,7 +44,7 @@ public interface BookingFacade {
      * @param pageNum  Pagination param. Number of the page to return. Starts from 1.
      * @return List of events.
      */
-    List<Event> getEventsForDay(LocalDate day, long pageSize, long pageNum);
+    List<EventDto> getEventsForDay(LocalDate day, long pageSize, long pageNum);
 
     /**
      * Creates new event. Event id should be auto-generated.
@@ -48,7 +52,7 @@ public interface BookingFacade {
      * @param event Event data.
      * @return Created Event object.
      */
-    Event createEvent(Event event);
+    EventDto createEvent(EventDto event);
 
     /**
      * Updates event using given data.
@@ -56,7 +60,7 @@ public interface BookingFacade {
      * @param event Event data for update. Should have id set.
      * @return Updated Event object.
      */
-    Event updateEvent(long id, Event event);
+    EventDto updateEvent(long id, EventDto event);
 
     /**
      * Deletes event by its id.
@@ -71,6 +75,7 @@ public interface BookingFacade {
      *
      * @return User.
      */
+    UserDTO getUserDTOById(long userId);
     User getUserById(long userId);
 
     /**
@@ -78,7 +83,7 @@ public interface BookingFacade {
      *
      * @return User.
      */
-    User getUserByEmail(String email);
+    UserDTO getUserByEmail(String email);
 
     /**
      * Get list of users by matching name. Name is matched using 'contains' approach.
@@ -89,7 +94,7 @@ public interface BookingFacade {
      * @param pageNum  Pagination param. Number of the page to return. Starts from 1.
      * @return List of users.
      */
-    List<User> getUsersByName(String name, long pageSize, long pageNum);
+    List<UserDTO> getUsersByName(String name, long pageSize, long pageNum);
 
     /**
      * Creates new user. User id should be auto-generated.
@@ -97,7 +102,7 @@ public interface BookingFacade {
      * @param user User data.
      * @return Created User object.
      */
-    User createUser(User user);
+    UserDTO createUser(UserDTO user);
 
     /**
      * Updates user using given data.
@@ -105,7 +110,7 @@ public interface BookingFacade {
      * @param user User data for update. Should have id set.
      * @return Updated User object.
      */
-    User updateUser(long id, User user);
+    UserDTO updateUser(long id, UserDTO user);
 
     /**
      * Deletes user by its id.
@@ -122,7 +127,7 @@ public interface BookingFacade {
      * @return Booked ticket object.
      * @throws IllegalStateException if this place has already been booked.
      */
-    Ticket bookTicket(Ticket ticket);
+    TicketDTO bookTicket(TicketDTO ticket);
 
     /**
      * Get all booked tickets for specified user. Tickets should be sorted by event date in descending order.
@@ -132,7 +137,7 @@ public interface BookingFacade {
      * @param pageNum  Pagination param. Number of the page to return. Starts from 1.
      * @return List of Ticket objects.
      */
-    List<Ticket> getBookedTickets(User user, long pageSize, long pageNum);
+    List<TicketDTO> getBookedTickets(User user, long pageSize, long pageNum);
 
     /**
      * Get all booked tickets for specified event. Tickets should be sorted in by user email in ascending order.
@@ -142,7 +147,7 @@ public interface BookingFacade {
      * @param pageNum  Pagination param. Number of the page to return. Starts from 1.
      * @return List of Ticket objects.
      */
-    List<Ticket> getBookedTickets(Event event, long pageSize, long pageNum);
+    List<TicketDTO> getBookedTickets(Event event, long pageSize, long pageNum);
 
 
     /**
@@ -153,9 +158,10 @@ public interface BookingFacade {
      */
     void cancelTicket(long ticketId);
 
-    Event updateEventName(int id, String eventName);
+    EventDto updateEventName(int id, String eventName);
 
-    List<Event> getAllEvents();
+    List<EventDto> getAllEvents();
 
+    UserAccountDTO createUserAccount(UserAccountDTO account);
 }
 

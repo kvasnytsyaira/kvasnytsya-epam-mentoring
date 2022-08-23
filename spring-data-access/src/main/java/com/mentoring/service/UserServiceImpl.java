@@ -1,9 +1,11 @@
 package com.mentoring.service;
 
+import com.mentoring.dto.UserDTO;
 import com.mentoring.exception.RecordNotFoundException;
 import com.mentoring.exception.RecordsNotFoundForSearchCriteriaException;
 import com.mentoring.model.User;
 import com.mentoring.repository.UserRepository;
+import com.mentoring.utills.MainUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,24 +17,29 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final MainUtil util;
+
+    public UserDTO getUserDTOById(long userId) {
+        return util.convertEntityToDto(userRepository.findById(userId)
+                .orElseThrow(() -> new RecordNotFoundException("User with such id does not exist!")));
+    }
 
     public User getUserById(long userId) {
-
         return userRepository.findById(userId)
                 .orElseThrow(() -> new RecordNotFoundException("User with such id does not exist!"));
     }
 
     @Override
-    public User getUserByEmail(String email) {
-        return userRepository.findAll()
+    public UserDTO getUserByEmail(String email) {
+        return util.convertEntityToDto(userRepository.findAll()
                 .stream()
                 .filter(user -> Objects.equals(user.getEmail(), email))
                 .findAny()
-                .orElseThrow(() -> new RecordsNotFoundForSearchCriteriaException("User with such email does not exist!"));
+                .orElseThrow(() -> new RecordsNotFoundForSearchCriteriaException("User with such email does not exist!")));
     }
 
     @Override
-    public List<User> getUsersByName(String name, long pageSize, long pageNum) {
+    public List<UserDTO> getUsersByName(String name, long pageSize, long pageNum) {
         List<User> users = userRepository.findAll()
                 .stream()
                 .filter(user -> user.getName().equals(name))
@@ -40,22 +47,22 @@ public class UserServiceImpl implements UserService {
                 .limit(pageSize)
                 .collect(Collectors.toList());
         if (users.size() > 0) {
-            return users;
+            return util.convertEntityUsersToDto(users);
         } else throw new RecordsNotFoundForSearchCriteriaException("User with such email does not exist!");
 
     }
 
     @Override
-    public User createUser(User user) {
-        return userRepository.save(user);
+    public UserDTO createUser(UserDTO user) {
+        return util.convertEntityToDto(userRepository.save(util.convertDtoToEntity(user)));
     }
 
     @Override
-    public User updateUser(long id, User userNew) {
+    public UserDTO updateUser(long id, UserDTO userNew) {
         User user = userRepository.findById(id).get();
         user.setName(userNew.getName());
         user.setEmail(userNew.getEmail());
-        return userRepository.save(user);
+        return util.convertEntityToDto(userRepository.save(user));
     }
 
     @Override
