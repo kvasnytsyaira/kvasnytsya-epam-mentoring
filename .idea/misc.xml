@@ -11,13 +11,21 @@
         <option value="$PROJECT_DIR$/multithreading/pom.xml" />
         <option value="$PROJECT_DIR$/core/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/core/jmp.service.api/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/core/application/pom.xml" />
+        <option value="$PROJECT_DIR$/core/jmp.bank.api/pom.xml" />
+        <option value="$PROJECT_DIR$/core/jmp.cloud.bank.impl/pom.xml" />
+        <option value="$PROJECT_DIR$/core/jmp.cloud.service.impl/pom.xml" />
+        <option value="$PROJECT_DIR$/core/jmp.dto/pom.xml" />
+        <option value="$PROJECT_DIR$/core/pom.xml" />
         <option value="$PROJECT_DIR$/external-api/pom.xml" />
+        <option value="$PROJECT_DIR$/multithreading/Task-5/pom.xml" />
         <option value="$PROJECT_DIR$/multithreading/Task5/pom.xml" />
+        <option value="$PROJECT_DIR$/multithreading/pom.xml" />
+        <option value="$PROJECT_DIR$/testing/pom.xml" />
       </set>
     </option>
   </component>

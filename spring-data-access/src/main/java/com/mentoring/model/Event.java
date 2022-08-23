@@ -33,15 +33,9 @@ public class Event implements Serializable {
             @Column(name = "event_date")
     LocalDate date;
 
+    int price;
+
     @OneToMany
     List<Ticket> ticketList = new ArrayList<>();
 
-
-    @Override
-    public String toString() {
-        return "{ id=" + id +
-                ", title='" + title + '\'' +
-                ", date=" + date +
-                '}';
-    }
 }
