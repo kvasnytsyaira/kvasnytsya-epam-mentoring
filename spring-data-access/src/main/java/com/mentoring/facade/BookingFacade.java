@@ -163,5 +163,9 @@ public interface BookingFacade {
     List<EventDto> getAllEvents();
 
     UserAccountDTO createUserAccount(UserAccountDTO account);
+
+    void refillAccount(UserAccountDTO userAccount);
+
+    UserAccountDTO getUserAccountById(long accountId);
 }
 

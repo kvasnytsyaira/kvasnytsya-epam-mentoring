@@ -6,11 +6,10 @@ import com.mentoring.dto.UserAccountDTO;
 import com.mentoring.dto.UserDTO;
 import com.mentoring.facade.BookingFacade;
 import com.mentoring.model.Event;
-import com.mentoring.model.Ticket;
 import com.mentoring.model.User;
-import com.mentoring.model.UserAccount;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.ValidationException;
+import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -39,6 +39,7 @@ public class MainController {
     public String welcome() {
         return "welcome";
     }
+
     @GetMapping(value = "/users/{userId}/tickets")
     public List<TicketDTO> ticketsByUser(Model model, @PathVariable int userId,
                                          @RequestParam("page-size") long pageSize, @RequestParam("page-num") long pageNum) {
@@ -46,6 +47,7 @@ public class MainController {
         List<TicketDTO> bookedTickets = bookingFacade.getBookedTickets(userById, pageSize, pageNum);
         return bookedTickets;
     }
+
     @GetMapping(value = "/events/{eventId}/tickets")
     public List<TicketDTO> ticketsByEvent(Model model, @PathVariable int eventId,
                                           @RequestParam("page-size") long pageSize, @RequestParam("page-num") long pageNum) {
@@ -123,10 +125,27 @@ public class MainController {
         bookingFacade.deleteUser(userId);
     }
 
-    @PostMapping(value = "/account")
+
+    @GetMapping(value = "/accounts/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void account(@RequestBody @Valid UserAccountDTO account) {
-        bookingFacade.createUserAccount(account);
+    public UserAccountDTO accountById(@PathVariable long id) {
+        return bookingFacade.getUserAccountById(id);
+    }
+
+    @PostMapping(value = "/accounts", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<UserAccountDTO> account(@RequestBody @Valid UserAccountDTO account) {
+        UserAccountDTO userAccount = bookingFacade.createUserAccount(account);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        URI location = URI.create("http://localhost:8080/accounts/" + userAccount.getId());
+        httpHeaders.add("Location", location.toString());
+        return new ResponseEntity<>(httpHeaders, HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "/accounts")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void accountRefill(@RequestBody @Valid UserAccountDTO account) {
+        bookingFacade.refillAccount(account);
     }
 
     @GetMapping(value = "/events/{eventId}", produces = MediaType.APPLICATION_JSON_VALUE)

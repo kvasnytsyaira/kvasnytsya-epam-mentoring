@@ -8,11 +8,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="task7" />
+        <module name="database" />
         <module name="spring-mvc" />
+        <module name="spring-core" />
         <module name="jmp.service.api" />
         <module name="spring-data-access" />
-        <module name="database" />
-        <module name="spring-core" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

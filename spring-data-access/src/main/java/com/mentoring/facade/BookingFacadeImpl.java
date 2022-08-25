@@ -214,6 +214,16 @@ public class BookingFacadeImpl implements BookingFacade {
         return userAccountService.createUserAccount(account);
     }
 
+    @Override
+    public void refillAccount(UserAccountDTO userAccount) {
+        userAccountService.refillAccount(userAccount);
+    }
+
+    @Override
+    public UserAccountDTO getUserAccountById(long accountId) {
+        return userAccountService.getUserAccountById(accountId);
+    }
+
     /**
      * Book ticket for a specified event on behalf of specified user.
      *
