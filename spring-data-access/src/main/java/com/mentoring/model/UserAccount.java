@@ -1,6 +1,5 @@
 package com.mentoring.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +16,8 @@ public class UserAccount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
 
-    @OneToOne(mappedBy = "userAccount")
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     User user;
 
     long wallet;

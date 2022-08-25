@@ -29,8 +29,7 @@ public class User {
     @Column(name = "user_email")
     String email;
 
-    @OneToOne
-    @JoinColumn(name = "id", referencedColumnName = "user_id")
+    @OneToOne(mappedBy = "user")
     UserAccount userAccount;
 
     @OneToMany(mappedBy = "user")
