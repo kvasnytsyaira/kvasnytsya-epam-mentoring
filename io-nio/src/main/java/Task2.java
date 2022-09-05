@@ -5,6 +5,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.nio.file.Files.walk;
+
 public class Task2 {
 
     //    Write the DiskAnalyzer utility command line, which accepts a path to the input (for example, C: )
@@ -21,32 +23,34 @@ public class Task2 {
 //    (for example, 100,000 files and 200 folders begin with the letter A).
 
     public static void main(String[] args) throws IOException {
+        Path modulePath = Path.of("io-nio");
+        Path absolutePath = modulePath.toAbsolutePath();
         Task2 task = new Task2();
         //1
-        Path path = task.analyzerMaximumSLetters("C:\\Users\\Iryna_Kvasnytsya\\Desktop\\BANK");
-        System.out.println("Maxixum S letters : " + path);
+        Path path1 = task.analyzerMaximumSLetters(absolutePath);
+        System.out.println("Maxixum S letters : " + path1);
         System.out.println("////////////////");
 
         //2
-        List<Path> paths = task.analyzer5TopLargestFiles("C:\\Users\\Iryna_Kvasnytsya\\Desktop\\BANK");
+        List<Path> paths = task.analyzer5TopLargestFiles(absolutePath);
         System.out.println("Listing 5 top largest files :");
         paths.forEach(System.out::println);
         System.out.println("////////////////");
 
         //3
-        Double averageFileSize = task.analyzerAverageFileSize("C:\\Users\\Iryna_Kvasnytsya\\Desktop\\BANK");
+        Double averageFileSize = task.analyzerAverageFileSize(absolutePath);
         System.out.println("Average file size : " + averageFileSize);
         System.out.println("////////////////");
         //4
-        Long numberOfFiles = task.analyzerNumberOfFilesStartsWithA("C:\\Users\\Iryna_Kvasnytsya\\Desktop");
+        Long numberOfFiles = task.analyzerNumberOfFilesStartsWithA(absolutePath);
         System.out.println("Number of files which starts with A : " + numberOfFiles);
         System.out.println("////////////////");
     }
 
     Stream<Double> stream = Stream.of(1d, 2d, 3d);
 
-    public Path analyzerMaximumSLetters(String path) throws IOException {
-        Stream<Path> listFiles = Files.walk(Path.of(path), 1);
+    public Path analyzerMaximumSLetters(Path path) throws IOException {
+        Stream<Path> listFiles = walk(path, 1);
 
         Optional<Path> result = listFiles
                 .filter(name -> name.getFileName().toString().contains("s"))
@@ -55,23 +59,23 @@ public class Task2 {
 
     }
 
-    public List<Path> analyzer5TopLargestFiles(String path) throws IOException {
+    public List<Path> analyzer5TopLargestFiles(Path path) throws IOException {
         List<Path> paths = new ArrayList<Path>();
-        return Files.walk(Path.of(path), 1)
+        return walk(path, 1)
                 .sorted((f1, f2) -> Long.compare(getFileSize(f2), getFileSize(f1)))
                 .limit(5)
                 .collect(Collectors.toList());
     }
 
-    public Double analyzerAverageFileSize(String path) throws IOException {
-        Stream<Path> walk = Files.walk(Path.of(path));
+    public Double analyzerAverageFileSize(Path path) throws IOException {
+        Stream<Path> walk = walk(path);
         OptionalDouble optionalAverageFileSize = walk.mapToLong(this::getFileSize).average();
         return optionalAverageFileSize.orElseGet(null);
     }
 
 
-    public Long analyzerNumberOfFilesStartsWithA(String path) throws IOException {
-        return Files.walk(Path.of(path), 10).map(path1 -> path1.getFileName().toString())
+    public Long analyzerNumberOfFilesStartsWithA(Path path) throws IOException {
+        return walk(path, 10).map(path1 -> path1.getFileName().toString())
                 .filter(name -> name.startsWith("A") || name.startsWith("a"))
                 .count();
     }
