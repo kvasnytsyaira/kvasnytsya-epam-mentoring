@@ -3,7 +3,6 @@ package com.epam;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.*;
 
 public class MailServerTest {
@@ -17,6 +16,6 @@ public class MailServerTest {
     @Test
     public void testSending() {
         mailServer.send("a@gmail.com, b@gmail.com", "Hello B!");
-        verify(mailServer, times(1)).send("a@gmail.com, b@gmail.com","Hello B!");
+        verify(mailServer, times(1)).send("a@gmail.com, b@gmail.com", "Hello B!");
     }
 }

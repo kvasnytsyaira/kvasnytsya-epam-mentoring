@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
 
 public class Reader {
 
@@ -13,7 +14,10 @@ public class Reader {
 
     public String readMailFromFile(String filename) {
         try {
-            File file = new File("C:\\Users\\Iryna_Kvasnytsya\\IdeaProjects\\mentoring\\kvasnytsya-epam-mentoring\\testing\\src\\main\\resources\\" + filename + ".txt");
+            Path of = Path.of("src\\main\\resources\\" + filename + ".txt");
+            Path absolutePath = of.toAbsolutePath();
+            System.out.println(absolutePath);
+            File file = new File(String.valueOf(absolutePath));
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             StringBuilder sb = new StringBuilder();
