@@ -96,39 +96,39 @@ public class Task3 {
         Path absolutePathFrom4 = folderPathFrom4.toAbsolutePath();
         Path absolutePathTo4 = folderPathTo4.toAbsolutePath();
 
-        Path folderPathFrom21 = Path.of("io-nio\\src\\main\\resources\\from\\1GB1.zip");
-        Path folderPathTo21 = Path.of("io-nio\\src\\main\\resources\\to\\1GB1.zip");
-        Path absolutePathFrom21 = folderPathFrom21.toAbsolutePath();
-        Path absolutePathTo21 = folderPathTo21.toAbsolutePath();
-        Path folderPathFrom22 = Path.of("io-nio\\src\\main\\resources\\from\\1GB2.zip");
-        Path folderPathTo22 = Path.of("io-nio\\src\\main\\resources\\to\\1GB2.zip");
-        Path absolutePathFrom22 = folderPathFrom22.toAbsolutePath();
-        Path absolutePathTo22 = folderPathTo22.toAbsolutePath();
-        Path folderPathFrom23 = Path.of("io-nio\\src\\main\\resources\\from\\1GB3.zip");
-        Path folderPathTo23 = Path.of("io-nio\\src\\main\\resources\\to\\1GB3.zip");
-        Path absolutePathFrom23 = folderPathFrom23.toAbsolutePath();
-        Path absolutePathTo23 = folderPathTo23.toAbsolutePath();
-        Path folderPathFrom24 = Path.of("io-nio\\src\\main\\resources\\from\\1GB4.zip");
-        Path folderPathTo24 = Path.of("io-nio\\src\\main\\resources\\to\\1GB4.zip");
-        Path absolutePathFrom24 = folderPathFrom24.toAbsolutePath();
-        Path absolutePathTo24 = folderPathTo24.toAbsolutePath();
+//        Path folderPathFrom21 = Path.of("io-nio\\src\\main\\resources\\from\\1GB1.zip");
+//        Path folderPathTo21 = Path.of("io-nio\\src\\main\\resources\\to\\1GB1.zip");
+//        Path absolutePathFrom21 = folderPathFrom21.toAbsolutePath();
+//        Path absolutePathTo21 = folderPathTo21.toAbsolutePath();
+//        Path folderPathFrom22 = Path.of("io-nio\\src\\main\\resources\\from\\1GB2.zip");
+//        Path folderPathTo22 = Path.of("io-nio\\src\\main\\resources\\to\\1GB2.zip");
+//        Path absolutePathFrom22 = folderPathFrom22.toAbsolutePath();
+//        Path absolutePathTo22 = folderPathTo22.toAbsolutePath();
+//        Path folderPathFrom23 = Path.of("io-nio\\src\\main\\resources\\from\\1GB3.zip");
+//        Path folderPathTo23 = Path.of("io-nio\\src\\main\\resources\\to\\1GB3.zip");
+//        Path absolutePathFrom23 = folderPathFrom23.toAbsolutePath();
+//        Path absolutePathTo23 = folderPathTo23.toAbsolutePath();
+//        Path folderPathFrom24 = Path.of("io-nio\\src\\main\\resources\\from\\1GB4.zip");
+//        Path folderPathTo24 = Path.of("io-nio\\src\\main\\resources\\to\\1GB4.zip");
+//        Path absolutePathFrom24 = folderPathFrom24.toAbsolutePath();
+//        Path absolutePathTo24 = folderPathTo24.toAbsolutePath();
 
-        Path folderPathFrom31 = Path.of("io-nio\\src\\main\\resources\\from\\10mb1.jpg");
-        Path folderPathTo31 = Path.of("io-nio\\src\\main\\resources\\to\\10mb1.jpg");
-        Path absolutePathFrom31 = folderPathFrom31.toAbsolutePath();
-        Path absolutePathTo31 = folderPathTo31.toAbsolutePath();
-        Path folderPathFrom32 = Path.of("io-nio\\src\\main\\resources\\from\\10mb2.jpg");
-        Path folderPathTo32 = Path.of("io-nio\\src\\main\\resources\\to\\10mb2.jpg");
-        Path absolutePathFrom32 = folderPathFrom32.toAbsolutePath();
-        Path absolutePathTo32 = folderPathTo32.toAbsolutePath();
-        Path folderPathFrom33 = Path.of("io-nio\\src\\main\\resources\\from\\10mb3.jpg");
-        Path folderPathTo33 = Path.of("io-nio\\src\\main\\resources\\to\\10mb3.jpg");
-        Path absolutePathFrom33 = folderPathFrom33.toAbsolutePath();
-        Path absolutePathTo33 = folderPathTo33.toAbsolutePath();
-        Path folderPathFrom34 = Path.of("io-nio\\src\\main\\resources\\from\\10mb4.jpg");
-        Path folderPathTo34 = Path.of("io-nio\\src\\main\\resources\\to\\10mb4.jpg");
-        Path absolutePathFrom34 = folderPathFrom34.toAbsolutePath();
-        Path absolutePathTo34 = folderPathTo34.toAbsolutePath();
+//        Path folderPathFrom31 = Path.of("io-nio\\src\\main\\resources\\from\\10mb1.jpg");
+//        Path folderPathTo31 = Path.of("io-nio\\src\\main\\resources\\to\\10mb1.jpg");
+//        Path absolutePathFrom31 = folderPathFrom31.toAbsolutePath();
+//        Path absolutePathTo31 = folderPathTo31.toAbsolutePath();
+//        Path folderPathFrom32 = Path.of("io-nio\\src\\main\\resources\\from\\10mb2.jpg");
+//        Path folderPathTo32 = Path.of("io-nio\\src\\main\\resources\\to\\10mb2.jpg");
+//        Path absolutePathFrom32 = folderPathFrom32.toAbsolutePath();
+//        Path absolutePathTo32 = folderPathTo32.toAbsolutePath();
+//        Path folderPathFrom33 = Path.of("io-nio\\src\\main\\resources\\from\\10mb3.jpg");
+//        Path folderPathTo33 = Path.of("io-nio\\src\\main\\resources\\to\\10mb3.jpg");
+//        Path absolutePathFrom33 = folderPathFrom33.toAbsolutePath();
+//        Path absolutePathTo33 = folderPathTo33.toAbsolutePath();
+//        Path folderPathFrom34 = Path.of("io-nio\\src\\main\\resources\\from\\10mb4.jpg");
+//        Path folderPathTo34 = Path.of("io-nio\\src\\main\\resources\\to\\10mb4.jpg");
+//        Path absolutePathFrom34 = folderPathFrom34.toAbsolutePath();
+//        Path absolutePathTo34 = folderPathTo34.toAbsolutePath();
 
 
         System.out.println("moving txt file");
@@ -153,50 +153,50 @@ public class Task3 {
         System.out.println("nio2FileAPIMover : " + (end14 - start14));
         System.out.println();
 
+// add 1 gb file to resources folder
+//        System.out.println("moving 1 gb file");
+//        long start21 = System.currentTimeMillis();
+//        fileStreamsMover(absolutePathFrom21,absolutePathTo21);
+//        long end21 = System.currentTimeMillis();
+//        System.out.println("fileStreamsMover : " + (end21 - start21));
+//
+//        long start22 = System.currentTimeMillis();
+//        fileStreamsMoverWithBuffer100kb(absolutePathFrom22,absolutePathTo22);
+//        long end22 = System.currentTimeMillis();
+//        System.out.println("fileStreamsMoverWithBuffer100kb : " + (end22 - start22));
+//
+//        long start23 = System.currentTimeMillis();
+//        fileChannelMover(absolutePathFrom23,absolutePathTo23);
+//        long end23 = System.currentTimeMillis();
+//        System.out.println("fileChannelMover : " + (end23 - start23));
+//
+//        long start24 = System.currentTimeMillis();
+//        nio2FileAPIMover(absolutePathFrom24,absolutePathTo24);
+//        long end24 = System.currentTimeMillis();
+//        System.out.println("nio2FileAPIMover : " + (end24 - start24));
+//        System.out.println();
 
-        System.out.println("moving 1 gb file");
-        long start21 = System.currentTimeMillis();
-        fileStreamsMover(absolutePathFrom21,absolutePathTo21);
-        long end21 = System.currentTimeMillis();
-        System.out.println("fileStreamsMover : " + (end21 - start21));
-
-        long start22 = System.currentTimeMillis();
-        fileStreamsMoverWithBuffer100kb(absolutePathFrom22,absolutePathTo22);
-        long end22 = System.currentTimeMillis();
-        System.out.println("fileStreamsMoverWithBuffer100kb : " + (end22 - start22));
-
-        long start23 = System.currentTimeMillis();
-        fileChannelMover(absolutePathFrom23,absolutePathTo23);
-        long end23 = System.currentTimeMillis();
-        System.out.println("fileChannelMover : " + (end23 - start23));
-
-        long start24 = System.currentTimeMillis();
-        nio2FileAPIMover(absolutePathFrom24,absolutePathTo24);
-        long end24 = System.currentTimeMillis();
-        System.out.println("nio2FileAPIMover : " + (end24 - start24));
-        System.out.println();
-
-
-        System.out.println("moving 10 mb file");
-        long start31 = System.currentTimeMillis();
-        fileStreamsMover(absolutePathFrom31,absolutePathTo31);
-        long end31 = System.currentTimeMillis();
-        System.out.println("fileStreamsMover : " + (end31 - start31));
-
-        long start32 = System.currentTimeMillis();
-        fileStreamsMoverWithBuffer100kb(absolutePathFrom32,absolutePathTo32);
-        long end32 = System.currentTimeMillis();
-        System.out.println("fileStreamsMoverWithBuffer100kb : " + (end32 - start32));
-
-        long start33 = System.currentTimeMillis();
-        fileChannelMover(absolutePathFrom33,absolutePathTo33);
-        long end33 = System.currentTimeMillis();
-        System.out.println("fileChannelMover : " + (end33 - start33));
-
-        long start34 = System.currentTimeMillis();
-        nio2FileAPIMover(absolutePathFrom34,absolutePathTo34);
-        long end34 = System.currentTimeMillis();
-        System.out.println("nio2FileAPIMover : " + (end34 - start34));
+// add 10 mb file to resources folder
+//        System.out.println("moving 10 mb file");
+//        long start31 = System.currentTimeMillis();
+//        fileStreamsMover(absolutePathFrom31,absolutePathTo31);
+//        long end31 = System.currentTimeMillis();
+//        System.out.println("fileStreamsMover : " + (end31 - start31));
+//
+//        long start32 = System.currentTimeMillis();
+//        fileStreamsMoverWithBuffer100kb(absolutePathFrom32,absolutePathTo32);
+//        long end32 = System.currentTimeMillis();
+//        System.out.println("fileStreamsMoverWithBuffer100kb : " + (end32 - start32));
+//
+//        long start33 = System.currentTimeMillis();
+//        fileChannelMover(absolutePathFrom33,absolutePathTo33);
+//        long end33 = System.currentTimeMillis();
+//        System.out.println("fileChannelMover : " + (end33 - start33));
+//
+//        long start34 = System.currentTimeMillis();
+//        nio2FileAPIMover(absolutePathFrom34,absolutePathTo34);
+//        long end34 = System.currentTimeMillis();
+//        System.out.println("nio2FileAPIMover : " + (end34 - start34));
     }
 
 }
