@@ -10,7 +10,6 @@ import org.junit.jupiter.api.io.TempDir;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertThrows;
@@ -24,7 +23,9 @@ public class TemplateEngineTest {
     TemplateEngine templateEngine;
     Reader reader;
 
-    String PATH = "C:\\Users\\Iryna_Kvasnytsya\\IdeaProjects\\mentoring\\kvasnytsya-epam-mentoring\\testing\\src\\main\\resources\\";
+
+    Path templateFileWithoutOnePlaceholder;
+    Path templateFileWithExtraTag;
     String FILE_NAME_TEMP_FOR_EXTRA_TAG = "testFile2";
     String FILE_NAME_TEMP_WITHOUT_ONE_PLACEHOLDER = "testFile1";
     String FILE_NAME = "byeBye";
@@ -47,11 +48,12 @@ public class TemplateEngineTest {
     void initialize() throws IOException {
         templateEngine = new TemplateEngine();
         reader = mock(Reader.class);
-        Path templateFileWithoutOnePlaceholder = tempDir.resolve(PATH + FILE_NAME_TEMP_WITHOUT_ONE_PLACEHOLDER + ".txt");
+
+        templateFileWithoutOnePlaceholder = tempDir.resolve(FILE_NAME_TEMP_WITHOUT_ONE_PLACEHOLDER + ".txt");
         List<String> mail1 = List.of(TEMPLATE_WITHOUT_ONE_PLACEHOLDER);
         Files.write(templateFileWithoutOnePlaceholder, mail1);
 
-        Path templateFileWithExtraTag = tempDir.resolve(PATH + FILE_NAME_TEMP_FOR_EXTRA_TAG + ".txt");
+        templateFileWithExtraTag = tempDir.resolve(FILE_NAME_TEMP_FOR_EXTRA_TAG + ".txt");
         List<String> mail2 = List.of(TEMPLATE);
         Files.write(templateFileWithExtraTag, mail2);
     }
@@ -66,7 +68,7 @@ public class TemplateEngineTest {
 
     @Test
     void testSystemThrowAnExceptionIfAtLeastOnePlaceholderIsNotProvided() {
-        when(reader.readMailFromFile(PATH + FILE_NAME_TEMP_WITHOUT_ONE_PLACEHOLDER + ".txt"))
+        when(reader.readMailFromFile(String.valueOf(templateFileWithoutOnePlaceholder)))
                 .thenReturn(TEMPLATE_WITHOUT_ONE_PLACEHOLDER);
 
         assertThrows(PlaceholderNotProvidedException.class,

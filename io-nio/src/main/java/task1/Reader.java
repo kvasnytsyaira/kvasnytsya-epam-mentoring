@@ -9,7 +9,7 @@ public class Reader {
 
     public String readMailFromFile() {
         try {
-            File file = new File("C:\\Users\\Iryna_Kvasnytsya\\IdeaProjects\\mentoring\\kvasnytsya-epam-mentoring\\io-nio\\src\\main\\resources\\message.txt");
+            File file = new File("src\\main\\resources\\message.txt");
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             StringBuilder sb = new StringBuilder();
