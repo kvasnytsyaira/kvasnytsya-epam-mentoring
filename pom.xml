@@ -23,6 +23,8 @@
         <module>spring-core</module>
         <module>spring-mvc</module>
         <module>spring-data-access</module>
+        <module>bootie</module>
+        <module>boot-1</module>
     </modules>
 
     <dependencies></dependencies>
