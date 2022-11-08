@@ -23,8 +23,10 @@
         <module>spring-core</module>
         <module>spring-mvc</module>
         <module>spring-data-access</module>
-        <module>bootie</module>
+        <module>boot-2</module>
         <module>boot-1</module>
+        <module>boot-3</module>
+        <module>boot-3-auth-server</module>
     </modules>
 
     <dependencies></dependencies>

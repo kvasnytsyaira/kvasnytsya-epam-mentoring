@@ -7,6 +7,7 @@ import com.boot.bootie.model.User;
 import com.boot.bootie.repository.OrderRepository;
 import com.boot.bootie.repository.ShoesRepository;
 import com.boot.bootie.repository.UserRepository;
+import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.weaver.ast.Or;
 
@@ -51,9 +52,10 @@ public class Service {
         orderRepository.save(order3);
     }
 
+    @Timed(value = "order.time", description = "Time taken to return result")
     public Order createOrder(Order order) {
-        shoeRepository.save(order.getShoe());
-        userRepository.save(order.getUser());
+//        shoeRepository.save(order.getShoe());
+//        userRepository.save(order.getUser());
         return orderRepository.save(order);
     }
 

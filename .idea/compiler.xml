@@ -11,15 +11,18 @@
         <module name="task7" />
         <module name="spring-mvc" />
         <module name="jmp.service.api" />
-        <module name="bootie" />
         <module name="testing" />
         <module name="jmp.dto" />
+        <module name="demo" />
         <module name="spring-data-access" />
         <module name="Task-5" />
         <module name="database" />
         <module name="spring-core" />
         <module name="jmp.bank.api" />
+        <module name="boot-3" />
         <module name="application" />
+        <module name="boot-3-auth-server" />
+        <module name="boot-2" />
         <module name="boot-1" />
         <module name="jmp.cloud.bank.impl" />
       </profile>
@@ -31,7 +34,10 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="boot-1" options="-parameters" />
-      <module name="bootie" options="-parameters" />
+      <module name="boot-2" options="-parameters" />
+      <module name="boot-3" options="-parameters" />
+      <module name="boot-3-auth-server" options="-parameters" />
+      <module name="demo" options="-parameters" />
       <module name="spring-data-access" options="-parameters" />
       <module name="task7" options="" />
     </option>
