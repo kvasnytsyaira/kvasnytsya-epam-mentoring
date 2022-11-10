@@ -12,6 +12,7 @@
         <option value="$PROJECT_DIR$/core/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/boot-2/pom.xml" />
+        <option value="$PROJECT_DIR$/rest/com.org/event-service-api/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

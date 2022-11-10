@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="event-service-dto" />
         <module name="jmp.cloud.service.impl" />
         <module name="task7" />
         <module name="spring-mvc" />
@@ -14,6 +15,7 @@
         <module name="testing" />
         <module name="jmp.dto" />
         <module name="demo" />
+        <module name="event-service-impl" />
         <module name="spring-data-access" />
         <module name="Task-5" />
         <module name="database" />
@@ -21,13 +23,19 @@
         <module name="jmp.bank.api" />
         <module name="boot-3" />
         <module name="application" />
+        <module name="event-service-rest" />
         <module name="boot-3-auth-server" />
+        <module name="event-service-api" />
         <module name="boot-2" />
         <module name="boot-1" />
         <module name="jmp.cloud.bank.impl" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="event-service-apii" target="11" />
+      <module name="event-service-dto" target="11" />
+      <module name="event-service-impl" target="11" />
+      <module name="event-service-rest" target="11" />
       <module name="Task5" target="11" />
     </bytecodeTargetLevel>
   </component>
@@ -38,6 +46,11 @@
       <module name="boot-3" options="-parameters" />
       <module name="boot-3-auth-server" options="-parameters" />
       <module name="demo" options="-parameters" />
+      <module name="event-service-api" options="" />
+      <module name="event-service-dto" options="" />
+      <module name="event-service-impl" options="" />
+      <module name="event-service-rest" options="" />
+      <module name="rest" options="" />
       <module name="spring-data-access" options="-parameters" />
       <module name="task7" options="" />
     </option>

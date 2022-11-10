@@ -27,6 +27,7 @@
         <module>boot-1</module>
         <module>boot-3</module>
         <module>boot-3-auth-server</module>
+        <module>rest</module>
     </modules>
 
     <dependencies></dependencies>
